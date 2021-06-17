@@ -1,0 +1,642 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Portfolio</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, YuMincho, "Yu Mincho", "Hiragino Mincho ProN", "Hiragino Mincho Pro", "Songti TC", "Songti SC", "SimSun", "Nanum Myeongjo", NanumMyeongjo, Batang, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, YuMincho, "Yu Mincho", "Hiragino Mincho ProN", "Hiragino Mincho Pro", "Songti TC", "Songti SC", "SimSun", "Nanum Myeongjo", NanumMyeongjo, Batang, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="f36274c5-e9f3-444f-b3ee-260dd91f6f4f" class="page sans"><header><img class="page-cover-image" src="Portfolio%200c1a7f1eb6a34fbfa244d235c41190e4/CreateRemote.png" style="object-position:center 62.55%"/><div class="page-header-icon page-header-icon-with-cover"><img class="icon" src="https://uploads-ssl.webflow.com/5e5fb69af39fe076e1ccecae/5e902a7fbc1f12f7f27dd04d_Group%201.svg"/></div><h1 class="page-title">Portfolio</h1></header><div class="page-body"><div id="265b963f-3a50-4147-8905-01143d6f9461" class="column-list"><div id="36edbdec-126a-4861-8b88-6669821a16d7" style="width:62.5%" class="column"><h2 id="01009c88-8933-49b2-a322-dd568b7ae284" class="">Product Manager &amp; Maker 
+based in Scotland </h2><p id="ff36ec72-31fe-468a-b471-4e29143819ee" class="">
+</p><blockquote id="edb6b6ca-ff6f-4162-a37c-0a83532a2e26" class="">I advise and help early stage founders and entrepreneurs ideate, validate, test, build and launch digital products.</blockquote><p id="c5409486-2502-4a9a-87ac-0d9fa24a5836" class="">
+</p></div><div id="922ee69e-3510-426c-abfc-469f4b081568" style="width:37.50000000000001%" class="column"><figure id="0c1a7f1e-b6a3-4fbf-a244-d235c41190e4" class="image"><a href="Portfolio%200c1a7f1eb6a34fbfa244d235c41190e4/Group_26.png"><img style="width:192px" src="Portfolio%200c1a7f1eb6a34fbfa244d235c41190e4/Group_26.png"/></a></figure></div></div><hr id="e79cea62-de77-4925-b755-c712932e5a6e"/><div id="16c65a23-cc56-4bcb-bd10-904eac7f12d0" class="column-list"><div id="577d3556-e735-431c-94ad-87c50bbed939" style="width:25%" class="column"><figure class="block-color-blue_background callout" style="white-space:pre-wrap;display:flex" id="796e861f-520f-4949-abd0-777b3afe440f"><div style="font-size:1.5em"><img class="icon" src="Portfolio%200c1a7f1eb6a34fbfa244d235c41190e4/Ellipse_37.png"/></div><div style="width:100%">About</div></figure></div><div id="f6f593cb-37fd-49be-ab5a-22e377d2c69d" style="width:25%" class="column"><figure class="block-color-blue_background callout" style="white-space:pre-wrap;display:flex" id="c4b17acf-4c0b-453e-8340-0d425ae23a6a"><div style="font-size:1.5em"><img class="icon" src="Portfolio%200c1a7f1eb6a34fbfa244d235c41190e4/Ellipse_37%201.png"/></div><div style="width:100%">Now</div></figure></div><div id="60b71601-e127-4ab9-badc-5cf0b460772a" style="width:25%" class="column"><figure class="block-color-blue_background callout" style="white-space:pre-wrap;display:flex" id="7d723adc-d754-4afa-96ba-1e0538d811b8"><div style="font-size:1.5em"><img class="icon" src="Portfolio%200c1a7f1eb6a34fbfa244d235c41190e4/Ellipse_37%202.png"/></div><div style="width:100%">Writing</div></figure></div><div id="c0459249-1d52-46a5-a9de-2ad1135a761d" style="width:25%" class="column"><figure class="block-color-blue_background callout" style="white-space:pre-wrap;display:flex" id="c735fe08-b920-4c46-94c1-56101ec90662"><div style="font-size:1.5em"><img class="icon" src="Portfolio%200c1a7f1eb6a34fbfa244d235c41190e4/Ellipse_37%203.png"/></div><div style="width:100%">Projects </div></figure></div></div><hr id="0957d9c3-2fe2-4b47-8965-cf4c95764502"/><div id="a51cdeb8-0bf3-4e48-b6bd-3aaa1b234cd2" class="column-list"><div id="86382c08-1102-4bdd-8725-6df1a04fe769" style="width:37.5%" class="column"><figure id="32c9964e-5f94-45be-a0c6-dee2b183945e" class="image"><a href="Portfolio%200c1a7f1eb6a34fbfa244d235c41190e4/Group_29.png"><img style="width:192px" src="Portfolio%200c1a7f1eb6a34fbfa244d235c41190e4/Group_29.png"/></a></figure></div><div id="d58fa672-c087-4104-8d0d-9623d485821b" style="width:62.5%" class="column"><h2 id="d273cbdd-a06c-4204-bb60-d900421c16b6" class=""><mark class="highlight-teal">About This Site</mark></h2><p id="6de83b5c-5acd-45d0-bfbd-1a4ed4e50588" class="">I&#x27;ve seen a growing number of folk using Notion to create super quick landing pages, personal sites and resumes recently and decided I would give it a shot myself using my current personal site as a blueprint to see how far I could take it.  <strong>Feel free to use this as a template.</strong></p><p id="ca107f6f-5ed3-4b6a-ba11-ba00d4c81d11" class="">
+</p><p id="a680e7ad-9a39-4abf-90e4-2a955c56c982" class=""><strong>Tip:</strong> <code>cmd/ctrl + shift + l to switch to Dark Mode</code></p><p id="d90147c5-1a2d-4229-b635-ae856cd09ce1" class="">
+</p><p id="841dc093-c5aa-4e7e-92e0-4bb6974503c7" class=""><strong><mark class="highlight-yellow_background"><a href="https://gum.co/gpeLW">GET FULL TEMPLATE</a></mark></strong></p></div></div><hr id="e01f3992-fa4f-4fa4-abc9-97b73f7103b8"/><h2 id="6594bd6a-cfd1-4cc2-9fbf-fd11a5384e9e" class=""><mark class="highlight-teal">Latest Content</mark></h2><div id="0ad55363-8050-42e5-8d38-d9448ad09506" class="column-list"><div id="591bf36c-2ee1-4553-822a-119f366f2987" style="width:33.333333333333336%" class="column"><figure id="180aee71-a715-4c11-9be7-2a1680628a9d" class="image"><a href="Portfolio%200c1a7f1eb6a34fbfa244d235c41190e4/Rectangle_106.png"><img style="width:1127px" src="Portfolio%200c1a7f1eb6a34fbfa244d235c41190e4/Rectangle_106.png"/></a></figure><h3 id="24841602-949a-45d1-adc9-62cacdc59fac" class=""><strong>Comprehensive list of &#x27;Smoke Test&#x27; techniques</strong></h3><p id="933d4e31-0190-4e0f-9f9b-5d3fb43d85df" class="">A definitive list of modern, alternative &#x27;Smoke Test&#x27; techniques to help test early signs of desirability with your target market.</p><figure class="block-color-blue_background callout" style="white-space:pre-wrap;display:flex" id="0b4325da-f4d3-4a9a-880a-034b162f6854"><div style="font-size:1.5em"><span class="icon">🔥</span></div><div style="width:100%"><a href="https://www.samdickie.me/writing/comprehensive-list-of-smoke-test-techniques-to-test-early-signs-of-desirability">Read More</a></div></figure></div><div id="b4cd551d-61db-4f06-b134-a2f3f0abebb8" style="width:33.333333333333336%" class="column"><figure id="7a9293c8-7503-4b25-8a89-e7b6088f4902" class="image"><a href="Portfolio%200c1a7f1eb6a34fbfa244d235c41190e4/Rectangle_108.png"><img style="width:1127px" src="Portfolio%200c1a7f1eb6a34fbfa244d235c41190e4/Rectangle_108.png"/></a></figure><h3 id="08520572-fc82-4699-896f-d7d85bd500a2" class=""><strong>Can I build an online shoe retailer with no shoes?</strong></h3><p id="9cb0396e-a33e-42a1-9ca9-4ea6c72ae101" class="">Turns out you can - or &#x27;could&#x27; should I say. This is Part 1 in my series of concierge MVP examples from well known tech ...</p><figure class="block-color-blue_background callout" style="white-space:pre-wrap;display:flex" id="c450f57c-9776-4a69-9bcf-99342b9c1a5c"><div style="font-size:1.5em"><span class="icon">👟</span></div><div style="width:100%"><a href="https://www.samdickie.me/writing/can-i-build-an-online-shoe-retailer-with-no-shoes">Read More</a></div></figure></div><div id="84c40e52-0f1a-4b31-ab6a-707383a02c70" style="width:33.33333333333333%" class="column"><figure id="a9f80425-f0ee-40b1-8d4e-ceabc82b08f0" class="image"><a href="Portfolio%200c1a7f1eb6a34fbfa244d235c41190e4/Rectangle_107.png"><img style="width:1127px" src="Portfolio%200c1a7f1eb6a34fbfa244d235c41190e4/Rectangle_107.png"/></a></figure><h3 id="89358351-a39c-4131-a68c-2992efc8676f" class="">Start with Problem Validation, NOT Solution Validation</h3><p id="96349849-a709-4887-af64-72b68563f048" class="">There is a difference between having an idea and validating an idea. Validation is the first step in moving towards learning ....</p><figure class="block-color-blue_background callout" style="white-space:pre-wrap;display:flex" id="99c7032d-c8e4-4371-b08e-c19653ea40f6"><div style="font-size:1.5em"><span class="icon">🛑</span></div><div style="width:100%"><a href="https://www.samdickie.me/writing/start-with-problem-validation-not-solution-validation">Read More</a></div></figure></div></div><p id="7359e30a-2f87-44d8-ac76-4bd47fe467bc" class="">
+</p><hr id="7e3c9cf0-f539-4734-996e-93651b581ee4"/><h2 id="d2f7899b-bafe-494c-a0dc-0533e2beffc2" class=""><mark class="highlight-teal"><strong>What I Do</strong></mark></h2><div id="9aa7e2f8-7963-4793-9b07-9e8656a3f056" class="column-list"><div id="48b93692-01ea-454d-a970-8a5ea0a262a5" style="width:50%" class="column"><h3 id="b5cfdcf1-5942-49b9-8cda-35b59da6126a" class="">💻 <strong>Product Management </strong></h3><p id="447515da-06d9-4d6f-8316-27370d7fbc4d" class="">I combine business, tech, and design in order to discover products that are valuable, feasible, and usable.</p></div><div id="3589481d-9405-4dee-a6da-37d004a420c2" style="width:50%" class="column"><h3 id="caf4d872-6118-4f7f-baf0-51c77830a083" class="">⛔️ No Code<strong> </strong></h3><p id="48f748ac-ed46-4591-871b-6b27743fe839" class="">I specialise in creating digital products and businesses without code in a fraction of the time and cost compared to traditional methods.</p></div></div><div id="9b1ff6c6-1eda-4cdb-bcdc-09186ea28c36" class="column-list"><div id="b36157d4-d6fb-4130-9f4a-2a4a164531f2" style="width:50%" class="column"><h3 id="6d5059b8-bcfb-4256-b4fb-4441808473a1" class="">🧭 <strong>Product Strategy </strong></h3><p id="4e287fc9-f42e-4aae-b759-dc300c9b3cac" class="">I help teams and founders create and maintain a clear and defined product and go to market strategy.</p></div><div id="19b37090-0fdd-4df0-994d-456020c2bde8" style="width:50%" class="column"><h3 id="7b69685b-2133-4dd0-8683-b3a5aaad4ffa" class="">🚀 <strong>MVPs </strong></h3><p id="54dd7669-dded-4b93-893d-dec70b091519" class="">I create lean, highly effective MVP experiments. Testing with real people against actual problems to ensure your core assumptions are validated.</p></div></div><div id="3d9660aa-dc9d-4a25-a509-2ea9d5a71d87" class="column-list"><div id="3b68ee45-f18d-4716-9fb5-9ad846a9126a" style="width:50%" class="column"><h3 id="e1053dd0-9925-4842-9818-24033120ea73" class="">🔎 Customer Development<strong> </strong></h3><p id="672f25ee-622e-4ca5-9abb-8b9f079b82cb" class="">I help identify the right problems to solve so that you build something that your customers will buy, helping you learn more about your customers.</p></div><div id="43b9bf8d-379b-4d86-b143-038ab3d1ffc6" style="width:50%" class="column"><h3 id="4a662127-d0f7-4e57-9b0f-6db50f56ed67" class="">👪 Community Building<strong> </strong></h3><p id="ab19c4a2-f447-40c0-97ae-f88e52bca35c" class="">I create and grow highly engaged online audiences via email and social marketing techniques.</p></div></div><hr id="448ee674-3445-4f30-b449-4c87292f878e"/><div id="c18fb94d-9185-4a69-9a4c-148635743551" class="column-list"><div id="0de5183c-c7be-4782-a300-f8ee53746593" style="width:68.75%" class="column"><p id="51a7c5af-58f5-4049-ba27-f61dd5f309f2" class="">
+</p><h2 id="ea638436-8d95-4d94-8d5b-fcfa7b74f082" class=""><mark class="highlight-teal">Office Hours</mark></h2><p id="5084112e-f344-4ef0-b476-6b467d09babb" class="">Looking for some product advice? Need help with validating an idea? Want to know how to create an MVP with no code?</p><p id="373fb0cb-5e05-46ba-9997-7c6db7e65a69" class="">I&#x27;ve helped <strong>47 </strong>people already. Book a 30 min call with me<strong>.</strong></p><p id="45797146-a9a3-4bbc-97c2-759d6dc76e11" class="">
+</p><p id="a85de8d0-17ad-4255-beea-99d8bcc35288" class=""><strong><mark class="highlight-teal_background">Book Now</mark></strong></p></div><div id="3bf8a887-050f-41ac-93c4-00d53b46f4c7" style="width:31.25%" class="column"><p id="262dc9c2-8a78-4abb-bb82-28fab03c0f04" class="">
+</p><p id="3dc9b020-a34c-4408-a0b2-7b9a5ef10c86" class="">
+</p><figure id="4331c761-21ee-44f9-afe2-5a7f0f4accee" class="image"><a href="Portfolio%200c1a7f1eb6a34fbfa244d235c41190e4/Group_7.png"><img style="width:144px" src="Portfolio%200c1a7f1eb6a34fbfa244d235c41190e4/Group_7.png"/></a></figure></div></div><hr id="531c22b7-9c7a-4f27-aff9-212fc43c7c21"/><p id="d60528cd-c388-4fb7-adac-9d0d21fa8f7e" class="">
+</p><div id="79c6ad69-bf31-4078-80c9-51d67715a583" class="column-list"><div id="f1946af8-98e2-4adb-9ff2-51fad199a022" style="width:37.5%" class="column"><figure id="4cca44dc-bcc0-43a0-89ce-ad5111599da6" class="image"><a href="Portfolio%200c1a7f1eb6a34fbfa244d235c41190e4/Group_28.png"><img style="width:240px" src="Portfolio%200c1a7f1eb6a34fbfa244d235c41190e4/Group_28.png"/></a></figure><p id="174b5854-e208-4947-8f89-e49de5f6d175" class="">
+</p></div><div id="e1142e29-34c4-43ae-9a7a-30100a321aef" style="width:62.5%" class="column"><h2 id="bfe6894c-90cb-4ca6-9f34-58512f9ba7d1" class=""><mark class="highlight-teal">Get My Latest Content</mark></h2><p id="badd8171-255d-415d-8fe9-5e01760e5c34" class="">No spam! Just my latest ideas, projects and insights as and when I feel it&#x27;s worth sharing. </p><p id="3e84b872-461e-4cc5-97a9-412eaf87f161" class="">Join <strong><mark class="highlight-yellow_background">486</mark></strong> curious people today</p><p id="881f5aee-56b2-42a2-94f0-07463e699921" class="">
+</p><figure id="4bb6d630-43de-4137-85a4-a028301331bc"><div class="source"><a href="https://chilipepper.io/form/mild-pickled-bannapepper-f6cb812d-03d3-4e30-90ca-a59ec5d73f40">https://chilipepper.io/form/mild-pickled-bannapepper-f6cb812d-03d3-4e30-90ca-a59ec5d73f40</a></div></figure></div></div><hr id="a284a282-e7f0-479b-b6ae-7fb718371730"/><h2 id="91939bca-ab6d-49bd-a759-6b1dd29aa23f" class=""><mark class="highlight-teal">Like this template?</mark></h2><p id="9f85952c-d6a1-4755-b87b-b482add9dfdc" class="">I will be creating a collection of new templates in the coming weeks. Want to support me and get first access to the new set of templates?</p><h3 id="a77eb219-c615-4d13-a27c-3bd401dd546f" class=""><mark class="highlight-yellow_background"><a href="https://www.buymeacoffee.com/samdickie">Buy me a coffee</a></mark><mark class="highlight-yellow_background"> </mark>☕️♥️ or <mark class="highlight-teal_background"><a href="https://gum.co/gpeLW">GET FULL TEMPLATE</a></mark></h3><p id="566df930-100d-4f38-8984-bc4af8d3da92" class="">
+</p><hr id="6acf0f5a-68f1-47bd-80c3-4f4622569f9b"/><div id="d9d603c6-61be-4775-8092-022974ebedf6" class="column-list"><div id="5ea345d4-8288-410a-9384-22293455ea0c" style="width:25%" class="column"><figure class="block-color-blue_background callout" style="white-space:pre-wrap;display:flex" id="453a1391-205a-41a5-b6d8-bd530096251b"><div style="font-size:1.5em"><img class="icon" src="https://uploads-ssl.webflow.com/5e5fb69af39fe076e1ccecae/5eb5c2f9ddf6ad28af3d9cf7_logo.svg"/></div><div style="width:100%"><a href="https://twitter.com/thisdickie"><strong>Twitter</strong></a></div></figure></div><div id="a90b5588-5c8a-4617-b108-8ef08b8b0a70" style="width:25%" class="column"><figure class="block-color-blue_background callout" style="white-space:pre-wrap;display:flex" id="8ed22230-72c2-491b-a93c-a137ace18571"><div style="font-size:1.5em"><img class="icon" src="https://uploads-ssl.webflow.com/5e5fb69af39fe076e1ccecae/5eb5c2f967097994d4b72fd9_medium.svg"/></div><div style="width:100%"><a href="https://medium.com/@samdickie"><strong>Medium</strong></a></div></figure></div><div id="0f8d43ef-db56-437f-b9c2-b5f96b7902ab" style="width:25%" class="column"><figure class="block-color-blue_background callout" style="white-space:pre-wrap;display:flex" id="a58f4c3c-4be0-43ba-b92c-1624f1be4a44"><div style="font-size:1.5em"><img class="icon" src="https://uploads-ssl.webflow.com/5e5fb69af39fe076e1ccecae/5eb5c2f917e59a4cf3c4ef37_linkedin.svg"/></div><div style="width:100%"><strong><a href="https://www.linkedin.com/in/samdickie/">LinkedIn</a></strong></div></figure></div><div id="5191454d-db83-45ba-9e3b-a9cc6940a831" style="width:25%" class="column"><figure class="block-color-blue_background callout" style="white-space:pre-wrap;display:flex" id="0d2bfdde-0aa0-4ce6-bf6e-e9558e74057e"><div style="font-size:1.5em"><img class="icon" src="https://uploads-ssl.webflow.com/5e5fb69af39fe076e1ccecae/5eb5c2f9bf5a491907087810_product-hunt.svg"/></div><div style="width:100%"><a href="https://www.producthunt.com/@thisdickie"><strong>PH</strong></a></div></figure></div></div><figure id="40ca2d23-f17f-4433-ba51-55537376919d"><div class="source"><a href="https://notionlytics.com/embed/ga-universal-img?data=eyJwYWdlVXJsIjoiaHR0cHM6Ly93d3cubm90aW9uLnNvL3RoaXNkaWNraWUvSGVsbG8tSS1tLVNhbS1GcmVlLWUxM2RlZmNmODMzOTQwNWViOWI4NmExYTEwMGYxNjQ3IiwidHJhY2tpbmdJZCI6IlVBLTEzMTE1ODY0Ni0xIn0=">https://notionlytics.com/embed/ga-universal-img?data=eyJwYWdlVXJsIjoiaHR0cHM6Ly93d3cubm90aW9uLnNvL3RoaXNkaWNraWUvSGVsbG8tSS1tLVNhbS1GcmVlLWUxM2RlZmNmODMzOTQwNWViOWI4NmExYTEwMGYxNjQ3IiwidHJhY2tpbmdJZCI6IlVBLTEzMTE1ODY0Ni0xIn0=</a></div></figure></div></article></body></html>
