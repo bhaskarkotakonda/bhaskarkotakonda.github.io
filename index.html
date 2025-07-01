@@ -20,6 +20,62 @@
             margin: 0;
             padding: 0;
             min-height: 100vh;
+            font-size: 1.08rem;
+            letter-spacing: 0.01em;
+            -webkit-font-smoothing: antialiased;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            color: var(--primary-color);
+            font-weight: 700;
+            letter-spacing: 0.01em;
+            margin-top: 1.5rem;
+            margin-bottom: 0.7rem;
+        }
+        h2 {
+            font-size: 2.1rem;
+            color: #b7a14a;
+            text-shadow: 0 2px 8px #ffe06644;
+        }
+        h3 {
+            font-size: 1.35rem;
+            color: var(--secondary-color);
+        }
+        h4 {
+            font-size: 1.13rem;
+            color: var(--secondary-color);
+        }
+        p, li {
+            font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+            font-size: 1.08rem;
+            line-height: 1.8;
+            color: var(--primary-color);
+            margin-bottom: 1.1rem;
+        }
+        .about-profile .contact-details, .contact-details {
+            font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+            font-size: 1.01rem;
+            color: var(--secondary-color);
+        }
+        .nav-tab {
+            font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+            font-size: 1.13rem;
+            font-weight: 700;
+            letter-spacing: 0.03em;
+        }
+        .view-section {
+            font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+        }
+        article {
+            background: #fffbe6;
+            border-radius: 12px;
+            box-shadow: 0 2px 12px #f7c94822;
+            padding: 1.2rem 1.5rem;
+            margin-bottom: 2.5rem;
+            transition: box-shadow 0.2s;
+        }
+        article:hover {
+            box-shadow: 0 4px 24px #f7c94855;
         }
         .main-layout {
             display: flex;
@@ -86,18 +142,10 @@
             flex-wrap: wrap;
         }
         .nav-tab {
-            font-size: 1.12rem;
+            font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+            font-size: 1.13rem;
             font-weight: 700;
-            color: var(--primary-color);
-            background: none;
-            border: none;
-            padding: 0.6rem 1.2rem;
-            border-radius: 6px 6px 0 0;
-            cursor: pointer;
-            transition: background 0.2s, color 0.2s;
-            letter-spacing: 0.01em;
-            min-width: 110px;
-            text-align: center;
+            letter-spacing: 0.03em;
         }
         .nav-tab.active, .nav-tab:hover {
             background: var(--highlight);
@@ -123,10 +171,12 @@
             .nav-tabs { gap: 0.7rem; }
         }
         @media (max-width: 700px) {
-            .main-layout { padding: 0 0.2rem; }
-            .nav-tabs { gap: 0.3rem; }
-            .nav-tab { font-size: 1.01rem; padding: 0.5rem 0.7rem; min-width: 90px; }
-            .profile-img { width: 120px; height: 120px; }
+            h2 { font-size: 1.4rem; }
+            h3 { font-size: 1.08rem; }
+            h4 { font-size: 1.01rem; }
+            p, li { font-size: 0.98rem; }
+            .nav-tab { font-size: 1.01rem; }
+            article { padding: 0.8rem 0.7rem; }
         }
         @media (max-width: 500px) {
             .main-layout { padding: 0 0.1rem; }
@@ -223,11 +273,12 @@
             const blogList = document.getElementById('blog-list');
             blogList.innerHTML = '<em>Loading...</em>';
             try {
-                // Use relative paths for GitHub Pages
+                // Use raw.githubusercontent.com for master branch
+                const base = 'https://raw.githubusercontent.com/bhaskarkotakonda/bhaskarkotakonda.github.io/master/blog/';
                 const files = [
-                    'blog/ghibli-magic-day.md',
-                    'blog/lessons-from-totoro.md',
-                    'blog/animated-fields.md'
+                    base + 'ghibli-magic-day.md',
+                    base + 'lessons-from-totoro.md',
+                    base + 'animated-fields.md'
                 ];
                 const posts = await Promise.all(files.map(async (file) => {
                     const res = await fetch(file);
