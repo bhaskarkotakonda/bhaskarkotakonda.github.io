@@ -223,12 +223,11 @@
             const blogList = document.getElementById('blog-list');
             blogList.innerHTML = '<em>Loading...</em>';
             try {
-                // Use absolute path for GitHub Pages root
-                const base = window.location.pathname.replace(/\/[^/]*$/, '/');
+                // Use relative paths for GitHub Pages
                 const files = [
-                    base + 'blog/ghibli-magic-day.md',
-                    base + 'blog/lessons-from-totoro.md',
-                    base + 'blog/animated-fields.md'
+                    'blog/ghibli-magic-day.md',
+                    'blog/lessons-from-totoro.md',
+                    'blog/animated-fields.md'
                 ];
                 const posts = await Promise.all(files.map(async (file) => {
                     const res = await fetch(file);
