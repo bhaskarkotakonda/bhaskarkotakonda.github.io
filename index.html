@@ -6,14 +6,11 @@
     <title>Bhaskar Kotakonda</title>
     <style>
         :root {
-            --primary-color: #1a1a2e;
-            --secondary-color: #16213e;
-            --accent-color: #0f3460;
-            --highlight: #e94560;
-            --background-color: #f5f6fa;
-            --card-bg: #fff;
-            --shadow: 0 4px 24px 0 rgba(16,30,54,0.08);
-            --gradient: linear-gradient(90deg, #0f3460 0%, #e94560 100%);
+            --primary-color: #3a2c00;
+            --secondary-color: #7c6f3c;
+            --accent-color: #f7c948;
+            --highlight: #ffe066;
+            --background-color: #fffbe6;
         }
         body {
             font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
@@ -45,7 +42,7 @@
             object-fit: cover;
             border: 4px solid var(--accent-color);
             margin-bottom: 1.2rem;
-            box-shadow: 0 2px 12px #0f346033;
+            box-shadow: 0 2px 12px #f7c94833;
         }
         .contact-details {
             margin-top: 1.5rem;
@@ -54,13 +51,13 @@
             text-align: center;
         }
         .contact-details a {
-            color: var(--highlight);
+            color: var(--accent-color);
             text-decoration: none;
             display: block;
             margin: 0.3rem 0;
         }
         .contact-details a:hover {
-            color: var(--accent-color);
+            color: var(--primary-color);
         }
         .content-area {
             flex: 1;
@@ -75,7 +72,7 @@
         .nav-tab {
             font-size: 1.08rem;
             font-weight: 600;
-            color: var(--accent-color);
+            color: var(--primary-color);
             background: none;
             border: none;
             padding: 0.5rem 1.1rem;
@@ -85,13 +82,14 @@
         }
         .nav-tab.active, .nav-tab:hover {
             background: var(--highlight);
-            color: #fff;
+            color: var(--primary-color);
         }
         .view-section {
-            background: var(--card-bg);
-            border-radius: 16px;
-            box-shadow: var(--shadow);
-            padding: 2.2rem 2rem 2rem 2rem;
+            /* Remove box, let content flow freely */
+            background: none;
+            border-radius: 0;
+            box-shadow: none;
+            padding: 0 0 2rem 0;
             min-height: 320px;
             animation: fadeIn 0.5s;
         }
@@ -106,7 +104,7 @@
         }
         @media (max-width: 600px) {
             .main-layout { padding: 0 0.5rem; }
-            .view-section { padding: 1rem; }
+            .view-section { padding: 0 0 1rem 0; }
             .nav-tabs { gap: 0.5rem; }
         }
     </style>
@@ -114,7 +112,7 @@
 <body>
     <div class="main-layout">
         <aside class="sidebar">
-            <img src="circle-cropped.png" alt="Bhaskar Kotakonda" class="profile-img">
+            <img src="attachment:ChatGPT Image Jul 1, 2025, 12_42_11 AM" alt="Bhaskar Kotakonda" class="profile-img">
             <div class="contact-details">
                 <div>Bhaskar Kotakonda</div>
                 <a href="mailto:bhaskarkotakonda@gmail.com">bhaskarkotakonda@gmail.com</a>
@@ -133,6 +131,7 @@
                 <button class="nav-tab" onclick="showTab('idea-backlog')">Idea Backlog</button>
             </nav>
             <section id="about" class="view-section">
+                <img src="attachment:ChatGPT Image Jul 1, 2025, 12_42_11 AM" alt="Bhaskar Kotakonda" style="width:120px;height:120px;border-radius:50%;object-fit:cover;box-shadow:0 2px 12px #f7c94833;float:right;margin-left:2rem;margin-bottom:1rem;">
                 <h2>About</h2>
                 <p>Welcome! I'm Bhaskar Kotakonda, a product & program manager, coder, and lifelong learner. I love building things, sharing ideas, and collaborating with creative minds. This is my digital home for thoughts, projects, and experiments.</p>
             </section>
