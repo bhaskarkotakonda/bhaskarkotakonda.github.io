@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bhaskar Kotakonda</title>
+    <link rel="icon" type="image/png" href="bhaskarkotakonda.png">
     <style>
         :root {
             --primary-color: #3a2c00;
@@ -126,12 +127,14 @@
                 <button class="nav-tab active" onclick="showTab('about')">About</button>
                 <button class="nav-tab" onclick="showTab('blog')">Blog</button>
                 <button class="nav-tab" onclick="showTab('case-studies')">Case Studies</button>
+                <button class="nav-tab" onclick="showTab('portfolio')">Portfolio</button>
                 <button class="nav-tab" onclick="showTab('substack')">Substack</button>
                 <button class="nav-tab" onclick="showTab('tracker')">Tracker</button>
+                <button class="nav-tab" onclick="showTab('finances')">Finances</button>
+                <button class="nav-tab" onclick="showTab('hobbies')">Hobbies</button>
                 <button class="nav-tab" onclick="showTab('idea-backlog')">Idea Backlog</button>
             </nav>
             <section id="about" class="view-section">
-                <img src="bhaskarkotakonda.png" alt="Bhaskar Kotakonda" style="width:120px;height:120px;border-radius:50%;object-fit:cover;box-shadow:0 2px 12px #f7c94833;float:right;margin-left:2rem;margin-bottom:1rem;">
                 <h2>About</h2>
                 <p>Welcome! I'm Bhaskar Kotakonda, a product & program manager, coder, and lifelong learner. I love building things, sharing ideas, and collaborating with creative minds. This is my digital home for thoughts, projects, and experiments.</p>
             </section>
@@ -143,6 +146,10 @@
                 <h2>Case Studies</h2>
                 <p>Coming soon: Deep dives into projects, challenges, and outcomes.</p>
             </section>
+            <section id="portfolio" class="view-section" style="display:none">
+                <h2>Portfolio</h2>
+                <p>Coming soon: A showcase of my selected works and projects.</p>
+            </section>
             <section id="substack" class="view-section" style="display:none">
                 <h2>Substack</h2>
                 <p>Subscribe to my newsletter for thoughtful essays and updates.</p>
@@ -151,6 +158,14 @@
             <section id="tracker" class="view-section" style="display:none">
                 <h2>Tracker</h2>
                 <p>Coming soon: My personal and professional progress tracker.</p>
+            </section>
+            <section id="finances" class="view-section" style="display:none">
+                <h2>Finances</h2>
+                <p>Coming soon: Insights and tools for managing personal finances and investments.</p>
+            </section>
+            <section id="hobbies" class="view-section" style="display:none">
+                <h2>Hobbies</h2>
+                <p>Coming soon: My favorite hobbies, interests, and creative pursuits.</p>
             </section>
             <section id="idea-backlog" class="view-section" style="display:none">
                 <h2>Idea Backlog</h2>
@@ -164,7 +179,7 @@
     </div>
     <script>
         function showTab(tab) {
-            const tabs = ['about','blog','case-studies','substack','tracker','idea-backlog','contact'];
+            const tabs = ['about','blog','case-studies','portfolio','substack','tracker','finances','hobbies','idea-backlog','contact'];
             tabs.forEach(id => {
                 document.getElementById(id).style.display = (id === tab) ? '' : 'none';
             });
