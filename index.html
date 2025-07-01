@@ -3,137 +3,203 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Personal Blog & About Me</title>
+    <title>Bhaskar Kotakonda | Portfolio</title>
     <style>
         :root {
-            --primary-color: #2d3748;
-            --secondary-color: #4a5568;
-            --accent-color: #667eea;
-            --background-color: #f7fafc;
+            --primary-color: #22223b;
+            --secondary-color: #4a4e69;
+            --accent-color: #9a8c98;
+            --background-color: #f2e9e4;
+            --highlight: #c9ada7;
         }
-
         body {
-            font-family: system-ui, -apple-system, sans-serif;
-            line-height: 1.6;
-            margin: 0;
-            padding: 2rem;
-            background-color: var(--background-color);
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            background: var(--background-color);
             color: var(--primary-color);
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        header {
-            margin-bottom: 4rem;
-        }
-
-        .site-title {
-            font-size: 2rem;
-            font-weight: bold;
-            margin-bottom: 2rem;
-        }
-
-        .nav-links {
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
-        }
-
-        .nav-links a {
-            color: var(--secondary-color);
-            text-decoration: none;
-            padding: 0.25rem 0;
-            transition: color 0.2s;
-            font-size: 1.1rem;
-        }
-
-        .nav-links a:hover {
-            color: var(--accent-color);
-        }
-
-        main {
-            margin-top: 2rem;
-        }
-
-        .post-list {
-            list-style: none;
+            margin: 0;
             padding: 0;
-            margin: 0;
         }
-
-        .post-item {
-            margin-bottom: 1.5rem;
-            border-bottom: 1px solid #edf2f7;
-            padding-bottom: 1.5rem;
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem;
         }
-
-        .post-item:last-child {
-            border-bottom: none;
+        header {
+            text-align: center;
+            margin-bottom: 2.5rem;
         }
-
-        .post-date {
+        .tagline {
+            font-size: 1.2rem;
+            color: var(--accent-color);
+            margin-top: 0.5rem;
+            font-weight: 500;
+        }
+        nav {
+            margin: 2rem 0 2.5rem 0;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+        }
+        nav a {
             color: var(--secondary-color);
-            font-size: 0.875rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .post-title {
-            font-size: 1.25rem;
-            margin: 0;
-            color: var(--primary-color);
             text-decoration: none;
-            display: block;
+            font-weight: 500;
+            transition: color 0.2s;
         }
-
-        .post-title:hover {
+        nav a:hover {
             color: var(--accent-color);
         }
-
-        .about-section {
-            margin-top: 4rem;
+        section {
+            margin-bottom: 2.5rem;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px #0001;
+            padding: 2rem;
         }
-
-        @media (max-width: 640px) {
-            body {
-                padding: 1rem;
-            }
+        h1, h2, h3 {
+            color: var(--primary-color);
+        }
+        .certifications, .brands {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            align-items: center;
+        }
+        .certifications img, .brands img {
+            height: 60px;
+            background: #f7fafc;
+            border-radius: 8px;
+            padding: 0.5rem;
+        }
+        .featured-work {
+            margin-top: 1.5rem;
+        }
+        .featured-year {
+            font-weight: bold;
+            margin-top: 1.5rem;
+            color: var(--accent-color);
+        }
+        .featured-list {
+            margin: 0.5rem 0 1.5rem 1.5rem;
+        }
+        .quote {
+            font-style: italic;
+            color: var(--secondary-color);
+            margin: 2rem 0 1rem 0;
+            text-align: center;
+        }
+        .social-links {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            margin-top: 1.5rem;
+        }
+        .social-links a {
+            color: var(--secondary-color);
+            text-decoration: none;
+            font-size: 1.3rem;
+        }
+        @media (max-width: 700px) {
+            .container { padding: 1rem; }
+            section { padding: 1rem; }
+            .certifications img, .brands img { height: 40px; }
         }
     </style>
 </head>
 <body>
-    <header>
-        <div class="site-title">Bhaskar Kotakonda</div>
-        <nav class="nav-links">
-            <a href="#now">/now</a>
-            <a href="#writings">/writings</a>
+    <div class="container">
+        <header>
+            <h1>Bhaskar Kotakonda</h1>
+            <div class="tagline">Building Things + Podcast + Author + Vegan 🌈</div>
+        </header>
+        <nav>
+            <a href="#about">About</a>
+            <a href="#certifications">Certifications</a>
+            <a href="#books">Books</a>
+            <a href="#podcast">Podcast</a>
+            <a href="#work">Featured Work</a>
+            <a href="#brands">Brands</a>
+            <a href="#contact">Contact</a>
         </nav>
-    </header>
-
-    <main>
-        <ul class="post-list">
-            <li class="post-item">
-                <div class="post-date">February 8, 2025</div>
-                <a href="#" class="post-title">The Art of Building Better Habits</a>
-            </li>
-            <li class="post-item">
-                <div class="post-date">February 1, 2025</div>
-                <a href="#" class="post-title">Future of Technology</a>
-            </li>
-            <li class="post-item">
-                <div class="post-date">January 25, 2025</div>
-                <a href="#" class="post-title">Learning in Public</a>
-            </li>
-            <li class="post-item">
-                <div class="post-date">January 18, 2025</div>
-                <a href="#" class="post-title">The Power of Simple Design</a>
-            </li>
-        </ul>
-
-        <section id="about" class="about-section">
-            <h2>About Me</h2>
-            <p>Hello! I'm a curious mind exploring technology, creativity, and personal growth. I share my journey and insights through this blog.</p>
-            <p>Outside of writing, I code, read, and explore nature. Always learning, always sharing.</p>
+        <section id="about">
+            <h2>Product & Program Manager | Product Owner, Scrum Master & PMP-Certified</h2>
+            <p>Professional team leader with 15+ years of hands-on experience leading successful teams and digital initiatives. I lead project sprints, ensure high-quality delivery, and excel at collaborative team and stakeholder management. I wear many hats: coding, research, and design. My focus is on asking the right questions and assembling the right team for success.</p>
         </section>
-    </main>
+        <section id="certifications">
+            <h2>Certifications</h2>
+            <div class="certifications">
+                <img src="https://images.squarespace-cdn.com/content/v1/5a0aa1c2d0e628c973acd8f8/1735342524798-VBTTAOU936MRRITJ9UCA/PSM.jpeg?format=300w" alt="PSM">
+                <img src="https://images.squarespace-cdn.com/content/v1/5a0aa1c2d0e628c973acd8f8/1735342494948-NKKCR9FS6BDSK4UF14OP/PSPO.png?format=100w" alt="PSPO">
+                <img src="https://images.squarespace-cdn.com/content/v1/5a0aa1c2d0e628c973acd8f8/1735341916799-Z1YSFHRAK5EH7HKRP3EC/PMP.png?format=100w" alt="PMP">
+                <img src="https://images.squarespace-cdn.com/content/v1/5a0aa1c2d0e628c973acd8f8/1735341721321-LDOZES39YRJ3PGFZG3KL/UC_Berkeley.png?format=100w" alt="UC Berkeley">
+                <img src="https://images.squarespace-cdn.com/content/v1/5a0aa1c2d0e628c973acd8f8/1735341719165-ZL0W5TEEZ203J9A0MGKD/Cornell.png?format=100w" alt="Cornell">
+                <img src="https://images.squarespace-cdn.com/content/v1/5a0aa1c2d0e628c973acd8f8/1735341720837-C1WYFJLXR6W4969LCZFN/Stanford.png?format=100w" alt="Stanford">
+                <img src="https://images.squarespace-cdn.com/content/v1/5a0aa1c2d0e628c973acd8f8/1735341721967-5A1XV84V9KUXXWKCWE4B/UX_Research.png?format=100w" alt="UX Research">
+            </div>
+        </section>
+        <section id="books">
+            <h2>Author | Vegan Anniversary in the Bay Area</h2>
+            <p>A celebration of food, culture, and the personal stories that unite them. Whether you're new to veganism or a seasoned plant-based eater, <b>Vegan Anniversary in the Bay Area</b> is your guide to embracing a multicultural spirit.</p>
+            <a href="https://www.thaisafernandes.com/cookbook" target="_blank">Learn More</a>
+        </section>
+        <section id="podcast">
+            <h2>Creator, Podcast Host & Producer | Latinx in Power Podcast</h2>
+            <p>Discover the world of tech like never before with <a href="https://www.latinxinpower.com/" target="_blank">Latinx in Power</a>! A podcast that demystifies tech through interviews with successful Latin American and Caribbean leaders.</p>
+        </section>
+        <section id="work">
+            <h2>Compilation of Featured Work</h2>
+            <div class="featured-work">
+                <div class="featured-year">2025</div>
+                <ul class="featured-list">
+                    <li>Launched a cookbook featuring Brazilian, American and French vegan dessert recipes: <a href="https://www.thaisafernandes.com/cookbook" target="_blank">Vegan Anniversary in the Bay Area</a></li>
+                    <li>Latinx in Power ranked on Best 100 Diversity And Inclusion Podcasts by <a href="https://www.millionpodcasts.com/diversity-inclusion-podcasts/" target="_blank">Million Podcasts</a></li>
+                    <li>Latinx in Power is ranked #6 on <a href="https://www.millionpodcasts.com/women-in-tech-podcasts/" target="_blank">Best 90 Women in Tech Podcasts</a></li>
+                    <li>Latinx in Power is among the <a href="https://podcast.feedspot.com/latino_podcasts/?feedid=5194334&_src=f1_featured_email" target="_blank">top 20 in Feedspot's list of the 100 Best Latino Podcasts</a></li>
+                </ul>
+                <div class="featured-year">2024</div>
+                <ul class="featured-list">
+                    <li>Participated in <a href="https://www.linkedin.com/feed/update/urn:li:activity:7248084650252754945/" target="_blank">Techqueria Summit</a></li>
+                    <li>Shared insights at <a href="https://www.linkedin.com/feed/update/urn:li:activity:7167471129983401984/" target="_blank">Women in Tech Caribbean Community</a></li>
+                    <li>Spoke at <a href="https://medium.com/pm101/language-evolution-towards-equality-cb8a169bb0bf" target="_blank">PayTech Women Latino Inclusion Group</a></li>
+                    <li>Portfolio highlighted by <a href="https://careerfoundry.com/en/blog/product-management/product-manager-portfolio/" target="_blank">Career Foundry</a></li>
+                </ul>
+                <div class="featured-year">2023</div>
+                <ul class="featured-list">
+                    <li><a href="https://creators.hubspot.com/creators/hubspot-podcast-network" target="_blank">Latinx in Power</a> joined HubSpot Podcast Network</li>
+                    <li>Collaborated with <a href="https://forbesenespanol.com/mexico/articulo/talento-latino-perjudicado-por-falta-de-diversidad-en-silicon-valley" target="_blank">Forbes</a> on diversity in Silicon Valley</li>
+                    <li>Partnered with Microsoft at <a href="https://www.linkedin.com/posts/thaifernandes_msbuild-activity-7072344291720769536-mb4T?utm_medium=member_desktop&utm_source=share" target="_blank">Microsoft Build</a></li>
+                </ul>
+                <!-- Add more years and items as needed -->
+            </div>
+        </section>
+        <div class="quote">“I believe that leadership is more than just delegating tasks. A true leader should also create a collaborative work environment where everyone can thrive.”</div>
+        <section id="brands">
+            <h2>Brands I’ve Worked With</h2>
+            <div class="brands">
+                <img src="https://images.squarespace-cdn.com/content/v1/5a0aa1c2d0e628c973acd8f8/1745868798043-M7URR91NGV0MTET25TIP/Hubspot_Logo.png?format=100w" alt="Hubspot">
+                <img src="https://images.squarespace-cdn.com/content/v1/5a0aa1c2d0e628c973acd8f8/1735344155678-WNHFU3G858CBNXDWVTU5/Twitter.png?format=100w" alt="Twitter">
+                <img src="https://images.squarespace-cdn.com/content/v1/5a0aa1c2d0e628c973acd8f8/1735344153365-N7C0PS75IKF9CJD7D5DL/BigCommerce.png?format=100w" alt="BigCommerce">
+                <img src="https://images.squarespace-cdn.com/content/v1/5a0aa1c2d0e628c973acd8f8/1735344154500-J0UC57Y8M6UAYA3SBRBP/Motorola.png?format=100w" alt="Motorola">
+                <img src="https://images.squarespace-cdn.com/content/v1/5a0aa1c2d0e628c973acd8f8/1735344157603-TV4TSFFAE438JIFTBK90/Wellsfargo.png?format=100w" alt="Wells Fargo">
+                <img src="https://images.squarespace-cdn.com/content/v1/5a0aa1c2d0e628c973acd8f8/1735344156555-Y3V081FBFX2F0ST99R68/Ubisoft.png?format=100w" alt="Ubisoft">
+                <img src="https://images.squarespace-cdn.com/content/v1/5a0aa1c2d0e628c973acd8f8/1735344156664-9XHEEB0B1H30Y7JYBVOA/Visa.png?format=100w" alt="Visa">
+                <img src="https://images.squarespace-cdn.com/content/v1/5a0aa1c2d0e628c973acd8f8/1735344615036-PTJEFXW3GIHB5YAYU66C/Mastercard.png?format=100w" alt="Mastercard">
+                <img src="https://images.squarespace-cdn.com/content/v1/5a0aa1c2d0e628c973acd8f8/1735345323928-OJYDWBJAPJ7MFFF7TT0U/SoFi.jpg?format=300w" alt="SoFi">
+                <img src="https://images.squarespace-cdn.com/content/v1/5a0aa1c2d0e628c973acd8f8/1745868798105-3ZHLUMLZR4DA30ASP9E7/Microsoft_Logo.png?format=100w" alt="Microsoft">
+            </div>
+        </section>
+        <section id="contact">
+            <h2>Contact & Social</h2>
+            <div class="social-links">
+                <a href="https://www.linkedin.com/in/bhaskarkotakonda" target="_blank">LinkedIn</a>
+                <a href="https://github.com/bhaskarkotakonda" target="_blank">GitHub</a>
+                <a href="mailto:bhaskarkotakonda@gmail.com">Email</a>
+                <a href="https://twitter.com/thaifernandes" target="_blank">Twitter</a>
+            </div>
+        </section>
+        <footer style="text-align:center; margin-top:2rem; color:var(--secondary-color); font-size:0.95rem;">
+            2025. All rights reserved. Made with 🖤
+        </footer>
+    </div>
 </body>
 </html>
