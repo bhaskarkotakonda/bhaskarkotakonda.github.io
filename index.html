@@ -31,24 +31,33 @@
             padding: 0 1.5rem;
         }
         .sidebar {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-end;
-            min-width: 180px;
-            justify-content: flex-end;
-            height: 100%;
-            padding-bottom: 2rem;
-            padding-right: 0.5rem;
+            display: none;
         }
         .profile-img {
-            width: 120px;
-            height: 120px;
+            width: 170px;
+            height: 170px;
             border-radius: 50%;
             object-fit: cover;
+            object-position: center 15%; /* Show more of the upper section (hair) */
             border: 4px solid var(--accent-color);
             margin-bottom: 1.2rem;
             box-shadow: 0 2px 12px #f7c94833;
-            align-self: flex-end;
+            align-self: center;
+        }
+        .about-profile {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 2.2rem;
+        }
+        .about-profile .profile-img {
+            margin-bottom: 0.7rem;
+        }
+        .about-profile .contact-details {
+            margin-top: 0.5rem;
+            font-size: 1.05rem;
+            color: var(--secondary-color);
+            text-align: center;
         }
         .contact-details {
             margin-top: 1.5rem;
@@ -117,6 +126,7 @@
             .main-layout { padding: 0 0.2rem; }
             .nav-tabs { gap: 0.3rem; }
             .nav-tab { font-size: 1.01rem; padding: 0.5rem 0.7rem; min-width: 90px; }
+            .profile-img { width: 120px; height: 120px; }
         }
         @media (max-width: 500px) {
             .main-layout { padding: 0 0.1rem; }
@@ -131,14 +141,7 @@
 <body>
     <div class="main-layout">
         <aside class="sidebar">
-            <img src="bhaskarkotakonda.png" alt="Bhaskar Kotakonda" class="profile-img">
-            <div class="contact-details">
-                <div>Bhaskar Kotakonda</div>
-                <a href="mailto:bhaskarkotakonda@gmail.com">bhaskarkotakonda@gmail.com</a>
-                <a href="https://www.linkedin.com/in/bhaskarkotakonda" target="_blank">LinkedIn</a>
-                <a href="https://github.com/bhaskarkotakonda" target="_blank">GitHub</a>
-                <a href="/" onclick="showTab('contact');return false;">Contact</a>
-            </div>
+            <!-- Sidebar removed, now handled in About section -->
         </aside>
         <main class="content-area">
             <nav class="nav-tabs">
@@ -153,6 +156,15 @@
                 <button class="nav-tab" onclick="showTab('idea-backlog')">Idea Backlog</button>
             </nav>
             <section id="about" class="view-section">
+                <div class="about-profile">
+                    <img src="bhaskarkotakonda.png" alt="Bhaskar Kotakonda" class="profile-img">
+                    <div class="contact-details">
+                        <div>Bhaskar Kotakonda</div>
+                        <a href="mailto:bhaskarkotakonda@gmail.com">bhaskarkotakonda@gmail.com</a>
+                        <a href="https://www.linkedin.com/in/bhaskarkotakonda" target="_blank">LinkedIn</a>
+                        <a href="https://github.com/bhaskarkotakonda" target="_blank">GitHub</a>
+                    </div>
+                </div>
                 <h2>About</h2>
                 <p>Welcome! I'm Bhaskar Kotakonda, a product & program manager, coder, and lifelong learner. I love building things, sharing ideas, and collaborating with creative minds. This is my digital home for thoughts, projects, and experiments.</p>
             </section>
