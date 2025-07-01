@@ -143,6 +143,114 @@
             h1 { font-size: 2rem; }
         }
     </style>
+    <!-- INFJ Style Guide for Portfolio Website -->
+    <!--
+    1. Authenticity & Inner World: Clean, user-centric, personal design. Prioritize content and story.
+    2. Purpose & Meaning: Every element is intentional. Logical navigation and clear hierarchy.
+    3. Idealism & Vision: Calming, sophisticated palette. Elegant, readable fonts. Minimalist, thoughtful layout.
+    4. Empathy & Connection: Welcoming, trustworthy UX. Whitespace for calm. Personal, story-driven writing.
+    -->
+    <style>
+    :root {
+        --infj-bg: #f7f6f3;
+        --infj-text: #23272a;
+        --infj-accent: #b07a5a; /* Dusty rose / deep rust */
+        --infj-heading: #2d3a3a; /* Deep charcoal/forest */
+        --infj-card: #fff;
+        --infj-muted: #e6e4e0;
+        --infj-link: #4b6a6a;
+        --infj-link-hover: #b07a5a;
+        --infj-shadow: 0 2px 16px 0 rgba(176,122,90,0.07);
+    }
+    body {
+        background: var(--infj-bg);
+        color: var(--infj-text);
+        font-family: 'Lora', serif;
+        margin: 0;
+        padding: 0;
+        line-height: 1.7;
+    }
+    h1, h2, h3, h4 {
+        font-family: 'Inter', 'Fira Sans', Arial, sans-serif;
+        color: var(--infj-heading);
+        font-weight: 700;
+        letter-spacing: 0.01em;
+    }
+    h1 {
+        font-size: 2.5rem;
+        margin-bottom: 0.5rem;
+    }
+    .tagline {
+        color: var(--infj-accent);
+        font-size: 1.1rem;
+        font-family: 'Lora', serif;
+        font-style: italic;
+        margin-bottom: 1.5rem;
+    }
+    a {
+        color: var(--infj-link);
+        text-decoration: underline;
+        transition: color 0.2s;
+    }
+    a:hover {
+        color: var(--infj-link-hover);
+    }
+    section {
+        background: var(--infj-card);
+        border-radius: 14px;
+        box-shadow: var(--infj-shadow);
+        padding: 2rem 1.5rem;
+        margin-bottom: 2.2rem;
+    }
+    nav {
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+        margin-bottom: 2.5rem;
+    }
+    nav a {
+        font-family: 'Inter', 'Fira Sans', Arial, sans-serif;
+        font-weight: 600;
+        font-size: 1.05rem;
+        color: var(--infj-accent);
+        background: var(--infj-muted);
+        border-radius: 6px;
+        padding: 0.3rem 0.9rem;
+        text-decoration: none;
+        transition: background 0.2s, color 0.2s;
+    }
+    nav a:hover {
+        background: var(--infj-accent);
+        color: #fff;
+    }
+    .quote {
+        color: var(--infj-accent);
+        font-style: italic;
+        background: var(--infj-muted);
+        border-radius: 10px;
+        padding: 1.2rem 1rem;
+        margin: 2rem 0 1.5rem 0;
+        text-align: center;
+        font-size: 1.1rem;
+    }
+    .social-links a {
+        color: var(--infj-accent);
+        font-family: 'Inter', 'Fira Sans', Arial, sans-serif;
+        font-weight: 600;
+        font-size: 1.2rem;
+        text-decoration: none;
+        margin: 0 0.7rem;
+        transition: color 0.2s;
+    }
+    .social-links a:hover {
+        color: var(--infj-link);
+    }
+    @media (max-width: 700px) {
+        .container { padding: 0.5rem; }
+        section { padding: 1rem; }
+        h1 { font-size: 1.7rem; }
+    }
+    </style>
 </head>
 <body>
     <div class="container">
