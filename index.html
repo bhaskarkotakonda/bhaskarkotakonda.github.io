@@ -74,17 +74,21 @@
             gap: 1.5rem;
             justify-content: flex-start;
             margin-bottom: 2.5rem;
+            flex-wrap: wrap;
         }
         .nav-tab {
-            font-size: 1.08rem;
-            font-weight: 600;
+            font-size: 1.12rem;
+            font-weight: 700;
             color: var(--primary-color);
             background: none;
             border: none;
-            padding: 0.5rem 1.1rem;
+            padding: 0.6rem 1.2rem;
             border-radius: 6px 6px 0 0;
             cursor: pointer;
             transition: background 0.2s, color 0.2s;
+            letter-spacing: 0.01em;
+            min-width: 110px;
+            text-align: center;
         }
         .nav-tab.active, .nav-tab:hover {
             background: var(--highlight);
@@ -105,14 +109,23 @@
         }
         @media (max-width: 900px) {
             .main-layout { flex-direction: column; align-items: stretch; }
-            .sidebar { flex-direction: row; justify-content: flex-start; min-width: 0; gap: 2rem; }
+            .sidebar { flex-direction: row; justify-content: flex-start; min-width: 0; gap: 2rem; height: auto; padding-bottom: 0; padding-right: 0; }
             .profile-img { margin-bottom: 0; margin-right: 1.5rem; }
+            .nav-tabs { gap: 0.7rem; }
         }
-        @media (max-width: 600px) {
-            .main-layout { padding: 0 0.5rem; }
-            .view-section { padding: 0 0 1rem 0; }
-            .nav-tabs { gap: 0.5rem; }
+        @media (max-width: 700px) {
+            .main-layout { padding: 0 0.2rem; }
+            .nav-tabs { gap: 0.3rem; }
+            .nav-tab { font-size: 1.01rem; padding: 0.5rem 0.7rem; min-width: 90px; }
         }
+        @media (max-width: 500px) {
+            .main-layout { padding: 0 0.1rem; }
+            .nav-tabs { gap: 0.1rem; flex-wrap: wrap; }
+            .nav-tab { font-size: 0.97rem; padding: 0.4rem 0.5rem; min-width: 80px; }
+        }
+        html { font-size: 17px; }
+        @media (max-width: 700px) { html { font-size: 15px; } }
+        @media (max-width: 500px) { html { font-size: 13.5px; } }
     </style>
 </head>
 <body>
@@ -198,20 +211,23 @@
             const blogList = document.getElementById('blog-list');
             blogList.innerHTML = '<em>Loading...</em>';
             try {
+                // Use absolute path for GitHub Pages root
+                const base = window.location.pathname.replace(/\/[^/]*$/, '/');
                 const files = [
-                    'blog/ghibli-magic-day.md',
-                    'blog/lessons-from-totoro.md',
-                    'blog/animated-fields.md'
+                    base + 'blog/ghibli-magic-day.md',
+                    base + 'blog/lessons-from-totoro.md',
+                    base + 'blog/animated-fields.md'
                 ];
                 const posts = await Promise.all(files.map(async (file) => {
                     const res = await fetch(file);
+                    if (!res.ok) throw new Error('Not found: ' + file);
                     const text = await res.text();
                     const match = text.match(/---([\s\S]*?)---([\s\S]*)/);
                     let meta = {}, content = text;
                     if(match) {
                         match[1].split('\n').forEach(line => {
                             const [k, ...v] = line.split(':');
-                            if(k && v.length) meta[k.trim()] = v.join(':').trim().replace(/^["']|["']$/g, '');
+                            if(k && v.length) meta[k.trim()] = v.join(':').trim().replace(/^\"|\"$/g, '');
                         });
                         content = match[2].trim();
                     }
@@ -226,7 +242,7 @@
                     </article>
                 `).join('');
             } catch (e) {
-                blogList.innerHTML = '<em>Could not load blog posts.</em>';
+                blogList.innerHTML = '<em>Could not load blog posts. If you are viewing this on GitHub Pages, make sure the blog files exist and are published. <br>URL tried: ' + (e && e.message ? e.message : '') + '</em>';
             }
         }
 
