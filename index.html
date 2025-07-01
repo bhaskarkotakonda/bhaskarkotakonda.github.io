@@ -33,8 +33,12 @@
         .sidebar {
             display: flex;
             flex-direction: column;
-            align-items: center;
+            align-items: flex-end;
             min-width: 180px;
+            justify-content: flex-end;
+            height: 100%;
+            padding-bottom: 2rem;
+            padding-right: 0.5rem;
         }
         .profile-img {
             width: 120px;
@@ -44,6 +48,7 @@
             border: 4px solid var(--accent-color);
             margin-bottom: 1.2rem;
             box-shadow: 0 2px 12px #f7c94833;
+            align-self: flex-end;
         }
         .contact-details {
             margin-top: 1.5rem;
@@ -140,7 +145,7 @@
             </section>
             <section id="blog" class="view-section" style="display:none">
                 <h2>Blog</h2>
-                <p>Coming soon: Articles, notes, and reflections on technology, product, and life.</p>
+                <div id="blog-list"></div>
             </section>
             <section id="case-studies" class="view-section" style="display:none">
                 <h2>Case Studies</h2>
@@ -186,6 +191,56 @@
             document.querySelectorAll('.nav-tab').forEach(btn => btn.classList.remove('active'));
             const idx = tabs.indexOf(tab);
             if(idx >= 0) document.querySelectorAll('.nav-tab')[idx].classList.add('active');
+            if(tab === 'blog') loadBlogPosts();
+        }
+
+        async function loadBlogPosts() {
+            const blogList = document.getElementById('blog-list');
+            blogList.innerHTML = '<em>Loading...</em>';
+            try {
+                const files = [
+                    'blog/ghibli-magic-day.md',
+                    'blog/lessons-from-totoro.md',
+                    'blog/animated-fields.md'
+                ];
+                const posts = await Promise.all(files.map(async (file) => {
+                    const res = await fetch(file);
+                    const text = await res.text();
+                    const match = text.match(/---([\s\S]*?)---([\s\S]*)/);
+                    let meta = {}, content = text;
+                    if(match) {
+                        match[1].split('\n').forEach(line => {
+                            const [k, ...v] = line.split(':');
+                            if(k && v.length) meta[k.trim()] = v.join(':').trim().replace(/^["']|["']$/g, '');
+                        });
+                        content = match[2].trim();
+                    }
+                    return {meta, content};
+                }));
+                posts.sort((a, b) => (b.meta.date || '').localeCompare(a.meta.date || ''));
+                blogList.innerHTML = posts.map(post => `
+                    <article style="margin-bottom:2.5rem;">
+                        <h3 style="margin-bottom:0.2rem; color:var(--secondary-color);">${post.meta.title || ''}</h3>
+                        <div style="font-size:0.98rem; color:#b7a14a; margin-bottom:0.7rem;">${post.meta.date || ''}</div>
+                        <div style="font-size:1.08rem; line-height:1.7;">${renderMarkdown(post.content)}</div>
+                    </article>
+                `).join('');
+            } catch (e) {
+                blogList.innerHTML = '<em>Could not load blog posts.</em>';
+            }
+        }
+
+        function renderMarkdown(md) {
+            // Simple markdown to HTML (headings, italics, bold, blockquote, lists, links, line breaks)
+            return md
+                .replace(/^### (.*$)/gim, '<h4>$1</h4>')
+                .replace(/^## (.*$)/gim, '<h3>$1</h3>')
+                .replace(/^# (.*$)/gim, '<h2>$1</h2>')
+                .replace(/\*\*(.*?)\*\*/gim, '<b>$1</b>')
+                .replace(/\*(.*?)\*/gim, '<i>$1</i>')
+                .replace(/\n\n/g, '<br><br>')
+                .replace(/\n/g, '<br>')
+                .replace(/\[(.*?)\]\((.*?)\)/gim, '<a href="$2" target="_blank">$1</a>');
         }
     </script>
 </body>
