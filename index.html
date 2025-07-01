@@ -23,221 +23,156 @@
             padding: 0;
             min-height: 100vh;
         }
-        .container {
+        .main-layout {
+            display: flex;
+            flex-direction: row;
+            align-items: flex-start;
+            gap: 2.5rem;
             max-width: 950px;
-            margin: 0 auto;
-            padding: 2.5rem 1.5rem 2rem 1.5rem;
+            margin: 3rem auto 0 auto;
+            padding: 0 1.5rem;
         }
-        header {
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-width: 180px;
+        }
+        .profile-img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid var(--accent-color);
+            margin-bottom: 1.2rem;
+            box-shadow: 0 2px 12px #0f346033;
+        }
+        .contact-details {
+            margin-top: 1.5rem;
+            font-size: 1.05rem;
+            color: var(--secondary-color);
             text-align: center;
+        }
+        .contact-details a {
+            color: var(--highlight);
+            text-decoration: none;
+            display: block;
+            margin: 0.3rem 0;
+        }
+        .contact-details a:hover {
+            color: var(--accent-color);
+        }
+        .content-area {
+            flex: 1;
+            min-width: 0;
+        }
+        .nav-tabs {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: flex-start;
             margin-bottom: 2.5rem;
         }
-        h1 {
-            font-size: 2.8rem;
-            font-weight: 800;
-            background: var(--gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        .tagline {
-            font-size: 1.25rem;
-            color: var(--highlight);
-            margin-top: 0.5rem;
-            font-weight: 600;
-            letter-spacing: 0.5px;
-        }
-        nav {
-            margin: 2rem 0 2.5rem 0;
-            display: flex;
-            justify-content: center;
-            gap: 2.2rem;
-        }
-        nav a {
-            color: var(--accent-color);
-            text-decoration: none;
-            font-weight: 600;
+        .nav-tab {
             font-size: 1.08rem;
-            padding: 0.3rem 0.7rem;
-            border-radius: 6px;
-            transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+            font-weight: 600;
+            color: var(--accent-color);
+            background: none;
+            border: none;
+            padding: 0.5rem 1.1rem;
+            border-radius: 6px 6px 0 0;
+            cursor: pointer;
+            transition: background 0.2s, color 0.2s;
         }
-        nav a:hover {
+        .nav-tab.active, .nav-tab:hover {
             background: var(--highlight);
             color: #fff;
-            box-shadow: 0 2px 8px #e9456022;
         }
-        section {
-            margin-bottom: 2.5rem;
+        .view-section {
             background: var(--card-bg);
             border-radius: 16px;
             box-shadow: var(--shadow);
             padding: 2.2rem 2rem 2rem 2rem;
-            transition: box-shadow 0.2s;
+            min-height: 320px;
+            animation: fadeIn 0.5s;
         }
-        section:hover {
-            box-shadow: 0 8px 32px 0 rgba(16,30,54,0.13);
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
-        h2, h3 {
-            color: var(--accent-color);
-            font-weight: 700;
+        @media (max-width: 900px) {
+            .main-layout { flex-direction: column; align-items: stretch; }
+            .sidebar { flex-direction: row; justify-content: flex-start; min-width: 0; gap: 2rem; }
+            .profile-img { margin-bottom: 0; margin-right: 1.5rem; }
         }
-        .certifications, .brands {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1.5rem;
-            align-items: center;
-            justify-content: flex-start;
-        }
-        .certifications img, .brands img {
-            height: 60px;
-            background: #f7fafc;
-            border-radius: 8px;
-            padding: 0.5rem;
-            box-shadow: 0 2px 8px #0f34601a;
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-        .certifications img:hover, .brands img:hover {
-            transform: scale(1.08) rotate(-2deg);
-            box-shadow: 0 4px 16px #e9456040;
-        }
-        .featured-work {
-            margin-top: 1.5rem;
-        }
-        .featured-year {
-            font-weight: bold;
-            margin-top: 1.5rem;
-            color: var(--highlight);
-            font-size: 1.1rem;
-        }
-        .featured-list {
-            margin: 0.5rem 0 1.5rem 1.5rem;
-        }
-        .quote {
-            font-style: italic;
-            color: var(--accent-color);
-            margin: 2rem 0 1rem 0;
-            text-align: center;
-            font-size: 1.15rem;
-        }
-        .social-links {
-            display: flex;
-            gap: 1.5rem;
-            justify-content: center;
-            margin-top: 1.5rem;
-        }
-        .social-links a {
-            color: var(--highlight);
-            text-decoration: none;
-            font-size: 1.35rem;
-            font-weight: 600;
-            transition: color 0.2s;
-        }
-        .social-links a:hover {
-            color: var(--accent-color);
-        }
-        @media (max-width: 700px) {
-            .container { padding: 1rem; }
-            section { padding: 1rem; }
-            .certifications img, .brands img { height: 40px; }
-            h1 { font-size: 2rem; }
+        @media (max-width: 600px) {
+            .main-layout { padding: 0 0.5rem; }
+            .view-section { padding: 1rem; }
+            .nav-tabs { gap: 0.5rem; }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>Bhaskar Kotakonda</h1>
-            <div class="tagline">Building Things + Podcast + Author + Vegan 🌈</div>
-        </header>
-        <nav>
-            <a href="#about">About</a>
-            <a href="#certifications">Certifications</a>
-            <a href="#books">Books</a>
-            <a href="#podcast">Podcast</a>
-            <a href="#work">Featured Work</a>
-            <a href="#brands">Brands</a>
-            <a href="#contact">Contact</a>
-        </nav>
-        <section id="about">
-            <h2>Product & Program Manager | Product Owner, Scrum Master & PMP-Certified</h2>
-            <p>Professional team leader with 15+ years of hands-on experience leading successful teams and digital initiatives. I lead project sprints, ensure high-quality delivery, and excel at collaborative team and stakeholder management. I wear many hats: coding, research, and design. My focus is on asking the right questions and assembling the right team for success.</p>
-        </section>
-        <section id="certifications">
-            <h2>Certifications</h2>
-            <div class="certifications">
-                <img src="https://images.squarespace-cdn.com/content/v1/5a0aa1c2d0e628c973acd8f8/1735342524798-VBTTAOU936MRRITJ9UCA/PSM.jpeg?format=300w" alt="PSM">
-                <img src="https://images.squarespace-cdn.com/content/v1/5a0aa1c2d0e628c973acd8f8/1735342494948-NKKCR9FS6BDSK4UF14OP/PSPO.png?format=100w" alt="PSPO">
-                <img src="https://images.squarespace-cdn.com/content/v1/5a0aa1c2d0e628c973acd8f8/1735341916799-Z1YSFHRAK5EH7HKRP3EC/PMP.png?format=100w" alt="PMP">
-                <img src="https://images.squarespace-cdn.com/content/v1/5a0aa1c2d0e628c973acd8f8/1735341721321-LDOZES39YRJ3PGFZG3KL/UC_Berkeley.png?format=100w" alt="UC Berkeley">
-                <img src="https://images.squarespace-cdn.com/content/v1/5a0aa1c2d0e628c973acd8f8/1735341719165-ZL0W5TEEZ203J9A0MGKD/Cornell.png?format=100w" alt="Cornell">
-                <img src="https://images.squarespace-cdn.com/content/v1/5a0aa1c2d0e628c973acd8f8/1735341720837-C1WYFJLXR6W4969LCZFN/Stanford.png?format=100w" alt="Stanford">
-                <img src="https://images.squarespace-cdn.com/content/v1/5a0aa1c2d0e628c973acd8f8/1735341721967-5A1XV84V9KUXXWKCWE4B/UX_Research.png?format=100w" alt="UX Research">
-            </div>
-        </section>
-        <section id="books">
-            <h2>Author | Vegan Anniversary in the Bay Area</h2>
-            <p>A celebration of food, culture, and the personal stories that unite them. Whether you're new to veganism or a seasoned plant-based eater, <b>Vegan Anniversary in the Bay Area</b> is your guide to embracing a multicultural spirit.</p>
-            <a href="https://www.thaisafernandes.com/cookbook" target="_blank">Learn More</a>
-        </section>
-        <section id="podcast">
-            <h2>Creator, Podcast Host & Producer | Latinx in Power Podcast</h2>
-            <p>Discover the world of tech like never before with <a href="https://www.latinxinpower.com/" target="_blank">Latinx in Power</a>! A podcast that demystifies tech through interviews with successful Latin American and Caribbean leaders.</p>
-        </section>
-        <section id="work">
-            <h2>Compilation of Featured Work</h2>
-            <div class="featured-work">
-                <div class="featured-year">2025</div>
-                <ul class="featured-list">
-                    <li>Launched a cookbook featuring Brazilian, American and French vegan dessert recipes: <a href="https://www.thaisafernandes.com/cookbook" target="_blank">Vegan Anniversary in the Bay Area</a></li>
-                    <li>Latinx in Power ranked on Best 100 Diversity And Inclusion Podcasts by <a href="https://www.millionpodcasts.com/diversity-inclusion-podcasts/" target="_blank">Million Podcasts</a></li>
-                    <li>Latinx in Power is ranked #6 on <a href="https://www.millionpodcasts.com/women-in-tech-podcasts/" target="_blank">Best 90 Women in Tech Podcasts</a></li>
-                    <li>Latinx in Power is among the <a href="https://podcast.feedspot.com/latino_podcasts/?feedid=5194334&_src=f1_featured_email" target="_blank">top 20 in Feedspot's list of the 100 Best Latino Podcasts</a></li>
-                </ul>
-                <div class="featured-year">2024</div>
-                <ul class="featured-list">
-                    <li>Participated in <a href="https://www.linkedin.com/feed/update/urn:li:activity:7248084650252754945/" target="_blank">Techqueria Summit</a></li>
-                    <li>Shared insights at <a href="https://www.linkedin.com/feed/update/urn:li:activity:7167471129983401984/" target="_blank">Women in Tech Caribbean Community</a></li>
-                    <li>Spoke at <a href="https://medium.com/pm101/language-evolution-towards-equality-cb8a169bb0bf" target="_blank">PayTech Women Latino Inclusion Group</a></li>
-                    <li>Portfolio highlighted by <a href="https://careerfoundry.com/en/blog/product-management/product-manager-portfolio/" target="_blank">Career Foundry</a></li>
-                </ul>
-                <div class="featured-year">2023</div>
-                <ul class="featured-list">
-                    <li><a href="https://creators.hubspot.com/creators/hubspot-podcast-network" target="_blank">Latinx in Power</a> joined HubSpot Podcast Network</li>
-                    <li>Collaborated with <a href="https://forbesenespanol.com/mexico/articulo/talento-latino-perjudicado-por-falta-de-diversidad-en-silicon-valley" target="_blank">Forbes</a> on diversity in Silicon Valley</li>
-                    <li>Partnered with Microsoft at <a href="https://www.linkedin.com/posts/thaifernandes_msbuild-activity-7072344291720769536-mb4T?utm_medium=member_desktop&utm_source=share" target="_blank">Microsoft Build</a></li>
-                </ul>
-                <!-- Add more years and items as needed -->
-            </div>
-        </section>
-        <div class="quote">“I believe that leadership is more than just delegating tasks. A true leader should also create a collaborative work environment where everyone can thrive.”</div>
-        <section id="brands">
-            <h2>Brands I’ve Worked With</h2>
-            <div class="brands">
-                <img src="https://images.squarespace-cdn.com/content/v1/5a0aa1c2d0e628c973acd8f8/1745868798043-M7URR91NGV0MTET25TIP/Hubspot_Logo.png?format=100w" alt="Hubspot">
-                <img src="https://images.squarespace-cdn.com/content/v1/5a0aa1c2d0e628c973acd8f8/1735344155678-WNHFU3G858CBNXDWVTU5/Twitter.png?format=100w" alt="Twitter">
-                <img src="https://images.squarespace-cdn.com/content/v1/5a0aa1c2d0e628c973acd8f8/1735344153365-N7C0PS75IKF9CJD7D5DL/BigCommerce.png?format=100w" alt="BigCommerce">
-                <img src="https://images.squarespace-cdn.com/content/v1/5a0aa1c2d0e628c973acd8f8/1735344154500-J0UC57Y8M6UAYA3SBRBP/Motorola.png?format=100w" alt="Motorola">
-                <img src="https://images.squarespace-cdn.com/content/v1/5a0aa1c2d0e628c973acd8f8/1735344157603-TV4TSFFAE438JIFTBK90/Wellsfargo.png?format=100w" alt="Wells Fargo">
-                <img src="https://images.squarespace-cdn.com/content/v1/5a0aa1c2d0e628c973acd8f8/1735344156555-Y3V081FBFX2F0ST99R68/Ubisoft.png?format=100w" alt="Ubisoft">
-                <img src="https://images.squarespace-cdn.com/content/v1/5a0aa1c2d0e628c973acd8f8/1735344156664-9XHEEB0B1H30Y7JYBVOA/Visa.png?format=100w" alt="Visa">
-                <img src="https://images.squarespace-cdn.com/content/v1/5a0aa1c2d0e628c973acd8f8/1735344615036-PTJEFXW3GIHB5YAYU66C/Mastercard.png?format=100w" alt="Mastercard">
-                <img src="https://images.squarespace-cdn.com/content/v1/5a0aa1c2d0e628c973acd8f8/1735345323928-OJYDWBJAPJ7MFFF7TT0U/SoFi.jpg?format=300w" alt="SoFi">
-                <img src="https://images.squarespace-cdn.com/content/v1/5a0aa1c2d0e628c973acd8f8/1745868798105-3ZHLUMLZR4DA30ASP9E7/Microsoft_Logo.png?format=100w" alt="Microsoft">
-            </div>
-        </section>
-        <section id="contact">
-            <h2>Contact & Social</h2>
-            <div class="social-links">
+    <div class="main-layout">
+        <aside class="sidebar">
+            <img src="circle-cropped.png" alt="Bhaskar Kotakonda" class="profile-img">
+            <div class="contact-details">
+                <div>Bhaskar Kotakonda</div>
+                <a href="mailto:bhaskarkotakonda@gmail.com">bhaskarkotakonda@gmail.com</a>
                 <a href="https://www.linkedin.com/in/bhaskarkotakonda" target="_blank">LinkedIn</a>
                 <a href="https://github.com/bhaskarkotakonda" target="_blank">GitHub</a>
-                <a href="mailto:bhaskarkotakonda@gmail.com">Email</a>
-                <a href="https://twitter.com/thaifernandes" target="_blank">Twitter</a>
+                <a href="/" onclick="showTab('contact');return false;">Contact</a>
             </div>
-        </section>
-        <footer style="text-align:center; margin-top:2rem; color:var(--secondary-color); font-size:0.95rem;">
-            2025. All rights reserved. Made with 🖤
-        </footer>
+        </aside>
+        <main class="content-area">
+            <nav class="nav-tabs">
+                <button class="nav-tab active" onclick="showTab('about')">About</button>
+                <button class="nav-tab" onclick="showTab('blog')">Blog</button>
+                <button class="nav-tab" onclick="showTab('case-studies')">Case Studies</button>
+                <button class="nav-tab" onclick="showTab('substack')">Substack</button>
+                <button class="nav-tab" onclick="showTab('tracker')">Tracker</button>
+                <button class="nav-tab" onclick="showTab('idea-backlog')">Idea Backlog</button>
+            </nav>
+            <section id="about" class="view-section">
+                <h2>About</h2>
+                <p>Welcome! I'm Bhaskar Kotakonda, a product & program manager, coder, and lifelong learner. I love building things, sharing ideas, and collaborating with creative minds. This is my digital home for thoughts, projects, and experiments.</p>
+            </section>
+            <section id="blog" class="view-section" style="display:none">
+                <h2>Blog</h2>
+                <p>Coming soon: Articles, notes, and reflections on technology, product, and life.</p>
+            </section>
+            <section id="case-studies" class="view-section" style="display:none">
+                <h2>Case Studies</h2>
+                <p>Coming soon: Deep dives into projects, challenges, and outcomes.</p>
+            </section>
+            <section id="substack" class="view-section" style="display:none">
+                <h2>Substack</h2>
+                <p>Subscribe to my newsletter for thoughtful essays and updates.</p>
+                <a href="https://substack.com" target="_blank">Go to Substack</a>
+            </section>
+            <section id="tracker" class="view-section" style="display:none">
+                <h2>Tracker</h2>
+                <p>Coming soon: My personal and professional progress tracker.</p>
+            </section>
+            <section id="idea-backlog" class="view-section" style="display:none">
+                <h2>Idea Backlog</h2>
+                <p>Coming soon: A living list of ideas, experiments, and future projects.</p>
+            </section>
+            <section id="contact" class="view-section" style="display:none">
+                <h2>Contact</h2>
+                <p>Feel free to reach out via email or LinkedIn for collaborations, questions, or just to say hi!</p>
+            </section>
+        </main>
     </div>
+    <script>
+        function showTab(tab) {
+            const tabs = ['about','blog','case-studies','substack','tracker','idea-backlog','contact'];
+            tabs.forEach(id => {
+                document.getElementById(id).style.display = (id === tab) ? '' : 'none';
+            });
+            document.querySelectorAll('.nav-tab').forEach(btn => btn.classList.remove('active'));
+            const idx = tabs.indexOf(tab);
+            if(idx >= 0) document.querySelectorAll('.nav-tab')[idx].classList.add('active');
+        }
+    </script>
 </body>
 </html>
