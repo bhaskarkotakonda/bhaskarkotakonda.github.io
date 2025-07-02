@@ -20,6 +20,7 @@ Personal Portfolio
 - **Reminders & Checkpoints**: Add reminders, recurring tasks, and checkpoint features for habits and goals.
 - **Bookmarks & Favorite Things**: Collect and organize bookmarks of favorite articles, books, and resources.
 - **Compiling Lists with AI**: Use AI to summarize, categorize, and recommend from personal lists and bookmarks.
+- **Separate Trackers & Ratings Daily**: Professional, Career, Physical, Mental, Relationships - Social, Family, GF and Friends, Having Fun and Brainless stuff
 
 ---
 
