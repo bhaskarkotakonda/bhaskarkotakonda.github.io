@@ -17,7 +17,7 @@ const navLinks: NavLink[] = [
   { href: '/about', label: 'About' },
 ];
 
-export default function Navbar({ currentPath = '/', basePath = '/personal-os' }: NavbarProps) {
+export default function Navbar({ currentPath = '/', basePath = '' }: NavbarProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
 
