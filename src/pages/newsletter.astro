@@ -1,0 +1,86 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Newsletter" description="Subscribe to get updates on my latest writing and projects.">
+  <section class="container-narrow py-20 md:py-32">
+    <!-- Header -->
+    <header class="mb-12 text-center">
+      <h1 class="text-4xl md:text-5xl font-extrabold mb-4">Newsletter</h1>
+      <p class="text-xl text-os-muted max-w-lg mx-auto">
+        Join my newsletter for occasional updates on technology, product building, and life lessons.
+      </p>
+    </header>
+
+    <!-- Signup Form -->
+    <div class="max-w-md mx-auto">
+      <form class="space-y-4" id="newsletter-form">
+        <div>
+          <label for="email" class="block text-sm font-medium mb-2">
+            Email Address
+          </label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            required
+            class="w-full px-4 py-3 border border-os-light rounded-lg focus:outline-none focus:ring-2 focus:ring-os-accent focus:border-transparent transition-all"
+            placeholder="you@example.com"
+          />
+        </div>
+        
+        <div>
+          <label for="name" class="block text-sm font-medium mb-2">
+            First Name (optional)
+          </label>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            class="w-full px-4 py-3 border border-os-light rounded-lg focus:outline-none focus:ring-2 focus:ring-os-accent focus:border-transparent transition-all"
+            placeholder="Your name"
+          />
+        </div>
+        
+        <button type="submit" class="w-full btn-primary py-3">
+          Subscribe
+        </button>
+      </form>
+
+      <p class="mt-4 text-center text-sm text-os-muted">
+        No spam. Unsubscribe anytime.
+      </p>
+    </div>
+
+    <!-- What to Expect -->
+    <div class="mt-16 max-w-lg mx-auto">
+      <h2 class="text-sm font-semibold text-os-muted uppercase tracking-wider mb-6 text-center">What You'll Get</h2>
+      <ul class="space-y-4">
+        <li class="flex items-start gap-3">
+          <span class="text-os-accent font-bold">→</span>
+          <span class="text-os-dark">Deep dives on AI, product development, and technology trends</span>
+        </li>
+        <li class="flex items-start gap-3">
+          <span class="text-os-accent font-bold">→</span>
+          <span class="text-os-dark">Personal reflections on building and creating</span>
+        </li>
+        <li class="flex items-start gap-3">
+          <span class="text-os-accent font-bold">→</span>
+          <span class="text-os-dark">Curated links and resources I find valuable</span>
+        </li>
+        <li class="flex items-start gap-3">
+          <span class="text-os-accent font-bold">→</span>
+          <span class="text-os-dark">Early access to new projects and writing</span>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Archive Preview -->
+    <div class="mt-16 pt-8 border-t border-os-light">
+      <h2 class="text-sm font-semibold text-os-muted uppercase tracking-wider mb-6">Recent Issues</h2>
+      <div class="space-y-4">
+        <p class="text-os-muted italic">Newsletter archive coming soon...</p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

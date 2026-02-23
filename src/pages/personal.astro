@@ -1,0 +1,119 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Personal" description="Private personal area.">
+  <section class="container-narrow py-20 md:py-32">
+    <!-- Password Gate -->
+    <div id="password-gate" class="max-w-sm mx-auto">
+      <header class="text-center mb-8">
+        <div class="w-16 h-16 bg-os-light rounded-full flex items-center justify-center mx-auto mb-4">
+          <svg class="w-8 h-8 text-os-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+          </svg>
+        </div>
+        <h1 class="text-3xl font-bold mb-2">Personal Area</h1>
+        <p class="text-os-muted">This section is password protected.</p>
+      </header>
+      
+      <form id="password-form" class="space-y-4">
+        <div>
+          <label for="password" class="block text-sm font-medium mb-2">
+            Password
+          </label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            required
+            class="w-full px-4 py-3 border border-os-light rounded-lg focus:outline-none focus:ring-2 focus:ring-os-accent focus:border-transparent transition-all"
+            placeholder="Enter password"
+          />
+        </div>
+        
+        <p id="error-message" class="text-red-500 text-sm hidden">
+          Incorrect password. Please try again.
+        </p>
+        
+        <button type="submit" class="w-full btn-primary py-3">
+          Access
+        </button>
+      </form>
+    </div>
+
+    <!-- Protected Content (hidden by default) -->
+    <div id="protected-content" class="hidden">
+      <header class="mb-12">
+        <h1 class="text-4xl md:text-5xl font-extrabold mb-4">Personal Dashboard</h1>
+        <p class="text-xl text-os-muted">Welcome to the private area.</p>
+      </header>
+
+      <div class="grid gap-6 md:grid-cols-2">
+        <a href="/personal-os/os" class="p-6 border border-os-light rounded-lg hover:border-os-accent transition-colors group">
+          <h3 class="text-xl font-bold mb-2 group-hover:text-os-accent">Personal OS Dashboard</h3>
+          <p class="text-os-muted">Access your personal operating system.</p>
+        </a>
+        
+        <a href="/personal-os/os/daily" class="p-6 border border-os-light rounded-lg hover:border-os-accent transition-colors group">
+          <h3 class="text-xl font-bold mb-2 group-hover:text-os-accent">Daily Log</h3>
+          <p class="text-os-muted">View and manage your daily entries.</p>
+        </a>
+        
+        <a href="/personal-os/os/finances" class="p-6 border border-os-light rounded-lg hover:border-os-accent transition-colors group">
+          <h3 class="text-xl font-bold mb-2 group-hover:text-os-accent">Finances</h3>
+          <p class="text-os-muted">Track your financial data.</p>
+        </a>
+        
+        <a href="/personal-os/os/settings" class="p-6 border border-os-light rounded-lg hover:border-os-accent transition-colors group">
+          <h3 class="text-xl font-bold mb-2 group-hover:text-os-accent">Settings</h3>
+          <p class="text-os-muted">Configure your preferences.</p>
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+  const CORRECT_PASSWORD = '232912';
+  const AUTH_KEY = 'personal-os-auth';
+  const AUTH_EXPIRY_KEY = 'personal-os-auth-expiry';
+  
+  const form = document.getElementById('password-form');
+  const passwordInput = document.getElementById('password') as HTMLInputElement;
+  const errorMessage = document.getElementById('error-message');
+  const passwordGate = document.getElementById('password-gate');
+  const protectedContent = document.getElementById('protected-content');
+  
+  // Check if already authenticated
+  function checkAuth() {
+    const token = localStorage.getItem(AUTH_KEY);
+    const expiry = localStorage.getItem(AUTH_EXPIRY_KEY);
+    if (!token || !expiry) return false;
+    if (Date.now() > parseInt(expiry, 10)) {
+      localStorage.removeItem(AUTH_KEY);
+      localStorage.removeItem(AUTH_EXPIRY_KEY);
+      return false;
+    }
+    return true;
+  }
+  
+  if (checkAuth()) {
+    window.location.href = '/personal-os/os';
+  }
+  
+  form?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    
+    if (passwordInput?.value === CORRECT_PASSWORD) {
+      // Set auth token with 7-day expiry
+      const expiry = Date.now() + (7 * 24 * 60 * 60 * 1000);
+      localStorage.setItem(AUTH_KEY, 'authenticated');
+      localStorage.setItem(AUTH_EXPIRY_KEY, expiry.toString());
+      window.location.href = '/personal-os/os';
+    } else {
+      errorMessage?.classList.remove('hidden');
+      passwordInput.value = '';
+      passwordInput.focus();
+    }
+  });
+</script>

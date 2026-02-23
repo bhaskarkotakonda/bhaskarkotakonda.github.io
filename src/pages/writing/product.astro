@@ -1,0 +1,74 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+// Get posts tagged with product-related tags
+const allPosts = await getCollection('blog', ({ data }) => !data.draft);
+const posts = allPosts.filter(post => 
+  post.data.tags?.some(tag => 
+    ['product', 'product-management', 'ux', 'design', 'startup', 'building'].includes(tag.toLowerCase())
+  )
+).sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
+---
+
+<BaseLayout title="Product Writing" description="Thoughts on product development, design, and building things people love.">
+  <section class="container-narrow py-20 md:py-32">
+    <!-- Header -->
+    <header class="mb-16">
+      <nav class="text-sm text-os-muted mb-4">
+        <a href="/personal-os/writing" class="hover:text-os-accent no-underline">Writing</a>
+        <span class="mx-2">/</span>
+        <span>Product</span>
+      </nav>
+      <h1 class="text-4xl md:text-5xl font-extrabold mb-4">Product</h1>
+      <p class="text-xl text-os-muted">
+        Lessons learned from building products, managing teams, and creating things people love.
+      </p>
+    </header>
+
+    <!-- Posts -->
+    {posts.length === 0 ? (
+      <div class="py-16 text-center">
+        <p class="text-os-muted mb-4">No product posts yet. Check back soon!</p>
+        <a href="/personal-os/writing" class="text-os-accent hover:text-os-accent-hover">
+          ← View all writing
+        </a>
+      </div>
+    ) : (
+      <div class="space-y-6">
+        {posts.map((post) => {
+          const formattedDate = new Date(post.data.date).toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+          });
+          
+          return (
+            <article class="group p-6 border border-os-light rounded-lg hover:border-os-accent transition-colors">
+              <a href={`/personal-os/writing/${post.slug}`} class="no-underline">
+                <h2 class="text-xl font-bold mb-2 group-hover:text-os-accent transition-colors">
+                  {post.data.title}
+                </h2>
+                <p class="text-os-muted text-sm mb-3">{formattedDate}</p>
+                {post.data.description && (
+                  <p class="text-os-dark">{post.data.description}</p>
+                )}
+              </a>
+            </article>
+          );
+        })}
+      </div>
+    )}
+
+    <!-- Topics -->
+    <div class="mt-16 pt-8 border-t border-os-light">
+      <h2 class="text-sm font-semibold text-os-muted uppercase tracking-wider mb-4">Related Topics</h2>
+      <div class="flex flex-wrap gap-2">
+        <span class="px-3 py-1.5 bg-os-light text-os-dark text-sm rounded-full">Product Strategy</span>
+        <span class="px-3 py-1.5 bg-os-light text-os-dark text-sm rounded-full">UX Design</span>
+        <span class="px-3 py-1.5 bg-os-light text-os-dark text-sm rounded-full">Startups</span>
+        <span class="px-3 py-1.5 bg-os-light text-os-dark text-sm rounded-full">Growth</span>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

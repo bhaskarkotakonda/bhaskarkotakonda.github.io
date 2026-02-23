@@ -1,0 +1,117 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts.map((post) => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await post.render();
+
+const formattedDate = new Date(post.data.date).toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+
+// Estimate reading time (rough: 200 words per minute)
+const wordCount = post.body.split(/\s+/).length;
+const readingTime = Math.ceil(wordCount / 200);
+---
+
+<BaseLayout 
+  title={post.data.title} 
+  description={post.data.description || `Read ${post.data.title} on Personal OS`}
+>
+  <article class="container-narrow py-20 md:py-32">
+    <!-- Header -->
+    <header class="mb-12">
+      <div class="mb-4">
+        <a 
+          href="/personal-os/writing" 
+          class="text-sm text-os-muted hover:text-os-accent transition-colors no-underline"
+        >
+          ← Back to Writing
+        </a>
+      </div>
+      
+      <h1 class="text-3xl md:text-4xl lg:text-5xl font-extrabold mb-4 text-balance">
+        {post.data.title}
+      </h1>
+      
+      <div class="flex flex-wrap items-center gap-4 text-sm text-os-muted">
+        <time datetime={post.data.date}>{formattedDate}</time>
+        <span>·</span>
+        <span>{readingTime} min read</span>
+        {post.data.author && (
+          <>
+            <span>·</span>
+            <span>By {post.data.author}</span>
+          </>
+        )}
+      </div>
+
+      {post.data.tags && post.data.tags.length > 0 && (
+        <div class="flex flex-wrap gap-2 mt-4">
+          {post.data.tags.map((tag: string) => (
+            <span class="px-2 py-1 text-xs font-medium text-os-muted bg-os-light rounded">
+              {tag}
+            </span>
+          ))}
+        </div>
+      )}
+    </header>
+
+    <!-- Content -->
+    <div class="prose prose-lg max-w-none">
+      <Content />
+    </div>
+
+    <!-- Footer -->
+    <footer class="mt-16 pt-8 border-t border-os-light">
+      <!-- Share Section -->
+      <div class="mb-8">
+        <p class="text-sm text-os-muted mb-3">Share this post:</p>
+        <div class="flex gap-4">
+          <a 
+            href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(post.data.title)}&url=${encodeURIComponent(`https://yourdomain.com/personal-os/writing/${post.slug}`)}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-os-muted hover:text-os-accent transition-colors"
+          >
+            Twitter
+          </a>
+          <a 
+            href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(`https://yourdomain.com/personal-os/writing/${post.slug}`)}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-os-muted hover:text-os-accent transition-colors"
+          >
+            LinkedIn
+          </a>
+        </div>
+      </div>
+
+      <!-- Navigation -->
+      <div class="flex justify-between items-center">
+        <a 
+          href="/personal-os/writing" 
+          class="text-os-black hover:text-os-accent-hover transition-colors"
+        >
+          ← All posts
+        </a>
+        <a 
+          href="/personal-os/contact" 
+          class="text-os-muted hover:text-os-accent transition-colors"
+        >
+          Questions? Get in touch →
+        </a>
+      </div>
+    </footer>
+  </article>
+</BaseLayout>

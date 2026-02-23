@@ -1,0 +1,92 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+
+const interests = [
+  "Systems design",
+  "AI/ML applications", 
+  "Knowledge management",
+  "Developer tools",
+  "Writing",
+  "Reading"
+];
+---
+
+<BaseLayout title="About" description="Learn more about who I am and what I do.">
+  <section class="container-narrow py-20 md:py-32">
+    <!-- Header -->
+    <header class="mb-12">
+      <h1 class="text-4xl md:text-5xl font-extrabold mb-4">About</h1>
+      <p class="text-xl text-os-muted">The short version.</p>
+    </header>
+
+    <!-- Bio -->
+    <div class="space-y-8 mb-16">
+      <div>
+        <h2 class="text-sm font-semibold text-os-muted uppercase tracking-wider mb-3">Bio</h2>
+        <p class="text-lg text-os-dark leading-relaxed">
+          I'm Bhaskar—a builder, writer, and systems thinker. I spend my days crafting 
+          software products that solve real problems and my evenings exploring ideas 
+          through writing.
+        </p>
+      </div>
+
+      <div>
+        <h2 class="text-sm font-semibold text-os-muted uppercase tracking-wider mb-3">Current Role</h2>
+        <p class="text-lg text-os-dark leading-relaxed">
+          Software Engineer working on developer tools and AI-powered applications. 
+          Previously built products at startups and large tech companies. I care deeply 
+          about craft, user experience, and building things that last.
+        </p>
+      </div>
+
+      <div>
+        <h2 class="text-sm font-semibold text-os-muted uppercase tracking-wider mb-3">Background</h2>
+        <p class="text-lg text-os-dark leading-relaxed">
+          Computer Science background with a focus on distributed systems. I've worked 
+          across the stack—from databases to design systems. I believe the best products 
+          come from understanding both the technology and the humans who use it.
+        </p>
+      </div>
+    </div>
+
+    <!-- Interests -->
+    <div class="mb-16">
+      <h2 class="text-sm font-semibold text-os-muted uppercase tracking-wider mb-4">Interests</h2>
+      <ul class="flex flex-wrap gap-2">
+        {interests.map((interest) => (
+          <li class="px-3 py-1.5 bg-os-light text-os-dark text-sm rounded-full">
+            {interest}
+          </li>
+        ))}
+      </ul>
+    </div>
+
+    <!-- Personal Note -->
+    <div class="p-6 bg-os-accent/10 border-l-4 border-os-accent rounded-r-lg">
+      <p class="text-os-dark">
+        <span class="font-semibold">A note on this site:</span> This is my Personal OS—a 
+        digital space where I think out loud, document my work, and share what I'm learning. 
+        It's intentionally minimal because clarity beats complexity.
+      </p>
+    </div>
+
+    <!-- Links -->
+    <div class="mt-12 pt-8 border-t border-os-light">
+      <h2 class="text-sm font-semibold text-os-muted uppercase tracking-wider mb-4">Elsewhere</h2>
+      <div class="flex flex-wrap gap-6">
+        <a href="https://github.com/yourusername" target="_blank" rel="noopener noreferrer">
+          GitHub
+        </a>
+        <a href="https://linkedin.com/in/yourusername" target="_blank" rel="noopener noreferrer">
+          LinkedIn
+        </a>
+        <a href="https://twitter.com/yourusername" target="_blank" rel="noopener noreferrer">
+          Twitter
+        </a>
+        <a href="/personal-os/contact">
+          Contact
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

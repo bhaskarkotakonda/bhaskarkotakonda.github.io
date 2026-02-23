@@ -1,0 +1,67 @@
+---
+title: "Building a PWA with Astro"
+description: "A guide to creating progressive web apps using Astro, React, and TailwindCSS."
+date: "2024-01-15"
+author: "Your Name"
+tags: ["astro", "pwa", "tutorial"]
+---
+
+# Building a PWA with Astro
+
+Progressive Web Apps (PWAs) combine the best of web and native apps. Here's how to build one with Astro.
+
+## What Makes a PWA?
+
+A PWA needs three key components:
+
+1. **HTTPS** - Secure connection (handled by your host)
+2. **Service Worker** - For offline support and caching
+3. **Web App Manifest** - Defines how the app appears when installed
+
+## The Manifest File
+
+Create a `manifest.json` in your public folder:
+
+```json
+{
+  "name": "Personal OS",
+  "short_name": "PersonalOS",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#fafafa",
+  "theme_color": "#0a0a0a"
+}
+```
+
+## Service Worker
+
+The service worker handles caching and offline functionality:
+
+```javascript
+self.addEventListener('install', (event) => {
+  event.waitUntil(
+    caches.open('v1').then((cache) => {
+      return cache.addAll([
+        '/',
+        '/styles.css',
+        '/script.js'
+      ]);
+    })
+  );
+});
+```
+
+## Benefits
+
+- **Offline access** - Content available without internet
+- **Installable** - Add to home screen like native apps
+- **Fast** - Cached resources load instantly
+- **Engaging** - Push notifications and more
+
+## Conclusion
+
+PWAs offer the perfect balance between web accessibility and native app experience. With Astro's static output and smart hydration, you get excellent performance out of the box.
+
+---
+
+*Next up: Adding offline support with Workbox*

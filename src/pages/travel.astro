@@ -1,0 +1,90 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+
+const travels = [
+  {
+    place: "Seattle, WA",
+    type: "Home Base",
+    description: "Where I currently live and work. Exploring the Pacific Northwest.",
+    visited: "2023 - Present"
+  },
+  {
+    place: "San Francisco, CA",
+    type: "City",
+    description: "The tech hub where I spent several formative years.",
+    visited: "2019 - 2023"
+  },
+  {
+    place: "Tokyo, Japan",
+    type: "International",
+    description: "A fascinating blend of tradition and technology.",
+    visited: "2022"
+  },
+];
+
+const bucketList = [
+  "Iceland - Northern Lights",
+  "New Zealand - South Island",
+  "Portugal - Lisbon & Porto",
+  "Norway - Fjords",
+  "Patagonia - Argentina/Chile"
+];
+---
+
+<BaseLayout title="Travel" description="Places I've been and where I want to go.">
+  <section class="container-narrow py-20 md:py-32">
+    <!-- Header -->
+    <header class="mb-16">
+      <h1 class="text-4xl md:text-5xl font-extrabold mb-4">Travel</h1>
+      <p class="text-xl text-os-muted">
+        Places I've explored and experiences along the way.
+      </p>
+    </header>
+
+    <!-- Map placeholder -->
+    <div class="mb-16 p-8 bg-os-light/50 rounded-lg text-center">
+      <p class="text-os-muted">🗺️ Interactive travel map coming soon...</p>
+    </div>
+
+    <!-- Places -->
+    <div class="mb-16">
+      <h2 class="text-sm font-semibold text-os-muted uppercase tracking-wider mb-8">Places I've Been</h2>
+      <div class="grid gap-6">
+        {travels.map((travel) => (
+          <div class="p-6 border border-os-light rounded-lg hover:border-os-accent transition-colors">
+            <div class="flex flex-wrap items-baseline justify-between gap-2 mb-2">
+              <h3 class="text-xl font-bold">{travel.place}</h3>
+              <span class="text-sm text-os-muted">{travel.visited}</span>
+            </div>
+            <span class="inline-block px-2 py-0.5 bg-os-accent/20 text-os-accent text-xs rounded mb-3">
+              {travel.type}
+            </span>
+            <p class="text-os-dark">{travel.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <!-- Bucket List -->
+    <div class="mb-16">
+      <h2 class="text-sm font-semibold text-os-muted uppercase tracking-wider mb-4">Bucket List</h2>
+      <ul class="space-y-2">
+        {bucketList.map((place) => (
+          <li class="flex items-center gap-3 text-os-dark">
+            <span class="text-os-muted">○</span>
+            {place}
+          </li>
+        ))}
+      </ul>
+    </div>
+
+    <!-- Travel Tips -->
+    <div class="p-6 bg-os-accent/10 border-l-4 border-os-accent rounded-r-lg">
+      <p class="font-semibold text-os-black mb-2">Travel Philosophy</p>
+      <p class="text-os-muted text-sm">
+        I prefer slow travel—spending more time in fewer places to really understand the local culture. 
+        Always looking for great coffee shops and hiking trails.
+      </p>
+    </div>
+  </section>
+</BaseLayout>
