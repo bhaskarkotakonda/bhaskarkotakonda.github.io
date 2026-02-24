@@ -6,13 +6,13 @@ interface NavLink {
 }
 
 const navLinks: NavLink[] = [
-  { href: '/personal-os/about', label: 'About' },
-  { href: '/personal-os/career', label: 'Career' },
-  { href: '/personal-os/writing', label: 'Writing' },
-  { href: '/personal-os/newsletter', label: 'Newsletter' },
-  { href: '/personal-os/content', label: 'Content' },
-  { href: '/personal-os/travel', label: 'Travel' },
-  { href: '/personal-os/personal', label: 'Personal' },
+  { href: '/about', label: 'About' },
+  { href: '/career', label: 'Career' },
+  { href: '/writing', label: 'Writing' },
+  { href: '/newsletter', label: 'Newsletter' },
+  { href: '/content', label: 'Content' },
+  { href: '/travel', label: 'Travel' },
+  { href: '/personal', label: 'Personal' },
 ];
 
 const currentPath = Astro.url.pathname;
@@ -23,7 +23,7 @@ const currentPath = Astro.url.pathname;
     <div class="flex items-center justify-between h-16">
       <!-- Logo -->
       <a 
-        href="/personal-os/" 
+        href="/" 
         class="text-xl font-bold text-os-black no-underline hover:text-os-accent transition-colors"
       >
         Bhaskar Kotakonda
@@ -80,13 +80,13 @@ const currentPath = Astro.url.pathname;
                 href={link.href}
                 class:list={[
                   'text-sm font-medium no-underline transition-colors relative',
-                  currentPath === link.href || (link.href !== '/personal-os/' && currentPath.startsWith(link.href))
+                  currentPath === link.href || (link.href !== '/' && currentPath.startsWith(link.href))
                     ? 'text-os-black'
                     : 'text-os-muted hover:text-os-accent',
                 ]}
               >
                 {link.label}
-                {(currentPath === link.href || (link.href !== '/personal-os/' && currentPath.startsWith(link.href))) && (
+                {(currentPath === link.href || (link.href !== '/' && currentPath.startsWith(link.href))) && (
                   <span class="block h-0.5 bg-os-accent mt-1"></span>
                 )}
               </a>
@@ -97,7 +97,7 @@ const currentPath = Astro.url.pathname;
       
       <!-- Mobile Menu Button - Just show Personal link on mobile -->
       <a
-        href="/personal-os/personal"
+        href="/personal"
         class="md:hidden px-4 py-2 bg-os-accent text-os-black text-sm font-medium rounded-lg no-underline"
       >
         Personal

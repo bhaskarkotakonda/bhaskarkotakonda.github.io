@@ -16,7 +16,7 @@ const posts = allPosts.filter(post =>
     <!-- Header -->
     <header class="mb-16">
       <nav class="text-sm text-os-muted mb-4">
-        <a href="/personal-os/writing" class="hover:text-os-accent no-underline">Writing</a>
+        <a href="/writing" class="hover:text-os-accent no-underline">Writing</a>
         <span class="mx-2">/</span>
         <span>Product</span>
       </nav>
@@ -30,7 +30,7 @@ const posts = allPosts.filter(post =>
     {posts.length === 0 ? (
       <div class="py-16 text-center">
         <p class="text-os-muted mb-4">No product posts yet. Check back soon!</p>
-        <a href="/personal-os/writing" class="text-os-accent hover:text-os-accent-hover">
+        <a href="/writing" class="text-os-accent hover:text-os-accent-hover">
           ← View all writing
         </a>
       </div>
@@ -45,7 +45,7 @@ const posts = allPosts.filter(post =>
           
           return (
             <article class="group p-6 border border-os-light rounded-lg hover:border-os-accent transition-colors">
-              <a href={`/personal-os/writing/${post.slug}`} class="no-underline">
+              <a href={`/writing/${post.slug}`} class="no-underline">
                 <h2 class="text-xl font-bold mb-2 group-hover:text-os-accent transition-colors">
                   {post.data.title}
                 </h2>
