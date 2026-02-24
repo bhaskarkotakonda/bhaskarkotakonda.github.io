@@ -1,3 +1,14 @@
+/**
+ * Card.tsx — Composable card component for structured content sections.
+ *
+ * Exports:
+ *   - Card (default)   — Container with optional link wrapper, padding, and hover shadow.
+ *   - CardHeader        — Top section (typically holds title + description).
+ *   - CardTitle         — Heading element (h2/h3/h4).
+ *   - CardDescription   — Muted subtitle text.
+ *   - CardContent       — Arbitrary body content.
+ *   - CardFooter        — Bottom section with top border.
+ */
 import type { ReactNode } from 'react';
 
 interface CardProps {
@@ -39,7 +50,8 @@ export default function Card({
   return <div className={baseClasses}>{children}</div>;
 }
 
-// Card subcomponents for structured content
+/* ---------- Card sub-components ---------- */
+
 interface CardHeaderProps {
   children: ReactNode;
   className?: string;

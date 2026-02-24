@@ -1,3 +1,15 @@
+/**
+ * Navbar.tsx — React alternative to Navbar.astro.
+ *
+ * Includes:
+ *   - Desktop horizontal nav links
+ *   - Mobile hamburger menu with slide-down animation
+ *   - Reduced-motion support
+ *   - Login button (links to /login — page does not exist yet)
+ *
+ * NOTE: This component is NOT currently used. All pages import Navbar.astro
+ * via BaseLayout. Kept as a React reference implementation.
+ */
 import { useState, useEffect } from 'react';
 
 interface NavLink {

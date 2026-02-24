@@ -1,5 +1,15 @@
+/**
+ * content/config.ts — Astro Content Collections configuration.
+ *
+ * Defines schemas for:
+ *   - blog  — MDX blog posts (src/content/blog/)
+ *   - jds   — Job description analyses (src/content/jds/)
+ *
+ * @see https://docs.astro.build/en/guides/content-collections/
+ */
 import { z, defineCollection } from 'astro:content';
 
+/** Blog posts collection — MDX files with frontmatter validated by Zod. */
 const blogCollection = defineCollection({
   type: 'content',
   schema: z.object({
@@ -13,6 +23,7 @@ const blogCollection = defineCollection({
   }),
 });
 
+/** Job descriptions collection — Markdown analyses of PM/TPM roles. */
 const jdsCollection = defineCollection({
   type: 'content',
   schema: z.object({

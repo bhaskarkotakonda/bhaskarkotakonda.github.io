@@ -1,8 +1,23 @@
+/**
+ * TagChip.tsx — Small label chip used for tags and categories.
+ *
+ * Renders as:
+ *   - `<a>`      when `href` is provided (navigable tag link)
+ *   - `<button>` when `onClick` is provided (interactive filter)
+ *   - `<span>`   otherwise (static display)
+ *
+ * Supports an `isActive` highlight state and two sizes (sm / md).
+ */
 interface TagChipProps {
+  /** Display text */
   label: string;
+  /** If provided, renders as an `<a>` link */
   href?: string;
+  /** If provided (without href), renders as a `<button>` */
   onClick?: () => void;
+  /** Highlighted/selected state */
   isActive?: boolean;
+  /** Visual size */
   size?: 'sm' | 'md';
 }
 

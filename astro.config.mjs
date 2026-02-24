@@ -1,3 +1,15 @@
+/**
+ * astro.config.mjs — Astro framework configuration.
+ *
+ * Key settings:
+ *   - site: Canonical URL for sitemap and OG tags
+ *   - output: 'static' — full SSG, no server runtime
+ *   - integrations: React (islands), Tailwind (styling), MDX (blog), Sitemap (SEO)
+ *   - markdown: Shiki syntax highlighting with github-dark theme
+ *   - vite.ssr.noExternal: react-icons bundled for SSR compatibility
+ *
+ * @see https://astro.build/config
+ */
 import { defineConfig } from 'astro/config';
 import react from '@astrojs/react';
 import tailwind from '@astrojs/tailwind';

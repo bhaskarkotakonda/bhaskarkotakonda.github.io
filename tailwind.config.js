@@ -1,3 +1,17 @@
+/**
+ * tailwind.config.js — Tailwind CSS design system configuration.
+ *
+ * Extends the default Tailwind theme with:
+ *   - os-* color palette (black → white + yellow accent)
+ *   - System UI font stack + monospace stack
+ *   - 4px baseline spacing grid (2px → 128px)
+ *   - Custom font sizes with line-height pairings
+ *   - Max-width presets (prose: 65ch, content: 1200px, narrow: 720px)
+ *   - Elevation shadow scale (os-sm → os-xl)
+ *   - Entrance animations (fade-in, slide-up, slide-down)
+ *
+ * Content paths include all Astro/React/MDX source files.
+ */
 /** @type {import('tailwindcss').Config} */
 export default {
   content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],

@@ -1,5 +1,17 @@
+/**
+ * SearchPalette.tsx — Cmd+K / Ctrl+K search command palette.
+ *
+ * Exports:
+ *   - SearchPalette (default) — Full-screen overlay with search input, grouped results,
+ *     keyboard navigation (↑/↓/Enter/Esc), and backdrop click-to-close.
+ *   - useSearchPalette (hook) — Boolean open/close state plus a global Cmd+K listener.
+ *
+ * Supply a custom `onSearch` callback to provide dynamic results, or use the built-in
+ * default page links for a static demo.
+ */
 import { useState, useEffect, useRef, useCallback } from 'react';
 
+/** A single result item displayed in the palette. */
 interface SearchResult {
   id: string;
   title: string;

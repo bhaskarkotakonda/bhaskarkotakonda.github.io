@@ -1,3 +1,10 @@
+/**
+ * Footer.tsx — React alternative to Footer.astro.
+ *
+ * NOTE: This component is NOT currently used by any page. BaseLayout imports
+ * Footer.astro instead. Social URLs below are generic placeholders — the
+ * canonical URLs live in Footer.astro.
+ */
 interface SocialLink {
   href: string;
   label: string;

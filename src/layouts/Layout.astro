@@ -1,4 +1,16 @@
 ---
+/**
+ * Layout.astro — Extended layout with additional display options.
+ *
+ * Similar to BaseLayout but adds optional props to:
+ *   - Go full-width (bypass container max-width)
+ *   - Hide the navbar and/or footer
+ *   - Include a "skip to content" accessibility link
+ *   - Apply reduced-motion global styles
+ *
+ * NOTE: Currently no pages import this layout — all pages use BaseLayout.
+ * Retained as a reference / future alternative.
+ */
 import Navbar from '@/components/Navbar.astro';
 import Footer from '@/components/Footer.astro';
 import '@/styles/global.css';

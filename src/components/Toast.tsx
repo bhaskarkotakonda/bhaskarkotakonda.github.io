@@ -1,3 +1,14 @@
+/**
+ * Toast.tsx — Toast notification component with auto-dismiss.
+ *
+ * Exports:
+ *   - Toast (default)  — Renders a positioned notification with icon, message, and close button.
+ *   - useToast (hook)  — State management helper returning { toast, showToast, hideToast }.
+ *
+ * Types: success (green) | error (red) | info (blue) | warning (yellow)
+ * Default duration: 3 000 ms (configurable via `duration` prop).
+ * Respects `prefers-reduced-motion` for slide/fade animations.
+ */
 import { useState, useEffect, useCallback } from 'react';
 
 type ToastType = 'success' | 'error' | 'info' | 'warning';
@@ -130,7 +141,10 @@ export default function Toast({
   );
 }
 
-// Hook for managing toast state
+/**
+ * useToast — Convenience hook for toast state management.
+ * @returns {{ toast, showToast, hideToast }} — current state and control functions.
+ */
 export function useToast() {
   const [toast, setToast] = useState<{
     message: string;

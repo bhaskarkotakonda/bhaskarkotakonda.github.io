@@ -1,4 +1,19 @@
 ---
+/**
+ * BaseLayout.astro — Primary HTML shell used by all pages.
+ *
+ * Provides:
+ *   - <head> with SEO meta tags, Open Graph, Twitter Card, PWA manifest, favicons
+ *   - Canonical URL generation
+ *   - Global CSS import
+ *   - Navbar (top) and Footer (bottom) chrome
+ *   - Service worker registration script
+ *
+ * Props:
+ *   - title       (string, required) — Page <title> and OG title
+ *   - description (string, optional) — Meta description / OG description
+ *   - image       (string, optional) — OG image path (defaults to /og-image.png)
+ */
 import Navbar from '@/components/Navbar.astro';
 import Footer from '@/components/Footer.astro';
 import '@/styles/global.css';

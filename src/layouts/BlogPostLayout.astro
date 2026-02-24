@@ -1,4 +1,18 @@
 ---
+/**
+ * BlogPostLayout.astro — Layout wrapper for individual blog posts.
+ *
+ * Wraps BaseLayout and adds an article header (formatted date, title, tag chips)
+ * and a `prose` content area for MDX-rendered body text.
+ *
+ * Props (via `frontmatter`):
+ *   - title       (string, required)
+ *   - description (string, optional)
+ *   - date        (string, required) — ISO date string
+ *   - author      (string, optional)
+ *   - tags        (string[], optional)
+ *   - image       (string, optional)
+ */
 import BaseLayout from './BaseLayout.astro';
 
 interface Props {

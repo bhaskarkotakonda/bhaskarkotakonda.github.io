@@ -1,5 +1,17 @@
+/**
+ * ListTable.tsx — Data table for displaying items with title, tags, status badges,
+ * and formatted dates. Used on listing pages (e.g., writing index, projects).
+ *
+ * Renders a responsive table with:
+ *   - Clickable item titles (optional href)
+ *   - Tag chips via `<TagChip>`
+ *   - Color-coded status badges (draft / in-progress / published / archived)
+ *   - Locale-formatted dates
+ *   - Empty-state message when no items are passed
+ */
 import TagChip from './TagChip';
 
+/** A single row in the ListTable. */
 interface ListItem {
   id: string;
   title: string;

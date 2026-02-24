@@ -1,4 +1,14 @@
 ---
+/**
+ * Navbar.astro — Server-rendered top navigation bar.
+ *
+ * Features:
+ *   - Desktop: horizontal link list + site logo
+ *   - Mobile: collapsible hamburger menu (JS-free CSS toggle could be added)
+ *   - Active-link highlighting based on current URL pathname
+ *
+ * The nav links array below is the single source of truth for site nav.
+ */
 interface NavLink {
   href: string;
   label: string;

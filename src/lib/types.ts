@@ -1,11 +1,23 @@
-// User
+/**
+ * lib/types.ts — Shared TypeScript interfaces for the personal OS app layer.
+ *
+ * These types represent a planned "personal operating system" data model including
+ * user profiles, universal items (books, movies, tasks, etc.), daily logs, finance
+ * snapshots, and an offline action queue.
+ *
+ * NOTE: These interfaces are aspirational — not all are actively used by the
+ * current static Astro site. They serve as a specification for future dynamic
+ * features (e.g., Supabase-backed CRUD, offline-first PWA sync).
+ */
+
+/** Authenticated user profile. */
 export interface User {
   id: string;
   email: string;
   created_at: string;
 }
 
-// Item - universal record for lists, captures, etc.
+/** Universal record for lists, captures, bookmarks, and tasks. */
 export interface Item {
   id: string;
   space: 'library' | 'capture' | 'lists' | 'seattle';
@@ -20,7 +32,7 @@ export interface Item {
   updated_at: string;
 }
 
-// Daily Log
+/** Daily journal entry with mood, energy, wins, and tomorrow's plan. */
 export interface DailyLog {
   id: string;
   date: string; // YYYY-MM-DD
@@ -32,7 +44,7 @@ export interface DailyLog {
   created_at: string;
 }
 
-// Finance Snapshot
+/** Point-in-time financial snapshot (assets, liabilities, net worth). */
 export interface FinanceSnapshot {
   id: string;
   date: string; // YYYY-MM-DD
@@ -45,7 +57,7 @@ export interface FinanceSnapshot {
   };
 }
 
-// Offline queue entry
+/** Offline queue entry — stores pending mutations for replay when back online. */
 export interface QueuedAction {
   id: string;
   action: 'create' | 'update' | 'delete';

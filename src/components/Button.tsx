@@ -1,5 +1,18 @@
+/**
+ * Button.tsx — Reusable button component with multiple visual variants and sizes.
+ *
+ * Exports:
+ *   - Button (default) — `<button>` element with loading state, icon slots, and a11y support.
+ *   - ButtonLink — `<a>` element styled identically to Button (for navigation).
+ *
+ * Variants: primary | secondary | outline | ghost
+ * Sizes:    sm | md | lg
+ *
+ * All variants respect `prefers-reduced-motion` and include focus ring styles.
+ */
 import type { ReactNode, ButtonHTMLAttributes } from 'react';
 
+/** Props for the `<button>` variant. Extends native HTML button attributes. */
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children: ReactNode;
   variant?: 'primary' | 'secondary' | 'outline' | 'ghost';
@@ -84,7 +97,10 @@ export default function Button({
   );
 }
 
-// Link variant that looks like a button
+/**
+ * ButtonLink — An `<a>` element styled as a button.
+ * Use when the action navigates to a URL rather than triggering a JS event.
+ */
 interface ButtonLinkProps {
   children: ReactNode;
   href: string;
