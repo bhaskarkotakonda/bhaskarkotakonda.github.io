@@ -56,7 +56,7 @@ export default function Navbar({ currentPath = '/', basePath = '' }: NavbarProps
             href={getFullPath('/')}
             className={`text-xl font-bold text-os-black no-underline hover:text-os-accent ${transitionClass}`}
           >
-            <span className="text-os-accent">⊙</span> Personal OS
+            <span className="text-os-accent">⊙</span> Bhaskar Kotakonda
           </a>
 
           {/* Desktop Navigation */}

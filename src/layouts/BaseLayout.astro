@@ -11,7 +11,7 @@ interface Props {
 
 const { 
   title, 
-  description = 'Personal OS - A digital home for thoughts, work, and experiments',
+  description = 'Bhaskar Kotakonda - A digital home for thoughts, work, and experiments',
   image = '/og-image.png'
 } = Astro.props;
 
@@ -26,22 +26,22 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <meta name="generator" content={Astro.generator} />
     
     <!-- Primary Meta Tags -->
-    <title>{title} | Personal OS</title>
-    <meta name="title" content={`${title} | Personal OS`} />
+    <title>{title} | Bhaskar Kotakonda</title>
+    <meta name="title" content={`${title} | Bhaskar Kotakonda`} />
     <meta name="description" content={description} />
     <link rel="canonical" href={canonicalURL} />
     
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content={canonicalURL} />
-    <meta property="og:title" content={`${title} | Personal OS`} />
+    <meta property="og:title" content={`${title} | Bhaskar Kotakonda`} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={image} />
     
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image" />
     <meta property="twitter:url" content={canonicalURL} />
-    <meta property="twitter:title" content={`${title} | Personal OS`} />
+    <meta property="twitter:title" content={`${title} | Bhaskar Kotakonda`} />
     <meta property="twitter:description" content={description} />
     <meta property="twitter:image" content={image} />
     
@@ -53,7 +53,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <meta name="theme-color" content="#0a0a0a" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-    <meta name="apple-mobile-web-app-title" content="Personal OS" />
+    <meta name="apple-mobile-web-app-title" content="Bhaskar Kotakonda" />
     <link rel="apple-touch-icon" href="/icons/icon-192x192.png" />
     
     <!-- Preconnect for performance -->

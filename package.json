@@ -1,8 +1,8 @@
 {
-  "name": "personal-os",
+  "name": "bhaskar-kotakonda",
   "type": "module",
   "version": "1.0.0",
-  "description": "Personal OS - A PWA personal website",
+  "description": "Bhaskar Kotakonda - A PWA personal website",
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",

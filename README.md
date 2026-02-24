@@ -1,4 +1,4 @@
-# Personal OS
+# Bhaskar Kotakonda
 
 A Progressive Web App (PWA) serving as a personal operating system for the web. Built with Astro, React, and TailwindCSS.
 
@@ -15,7 +15,7 @@ A Progressive Web App (PWA) serving as a personal operating system for the web. 
 
 ```bash
 # Navigate to project
-cd personal-os
+cd bhaskar-kotakonda
 
 # Install dependencies
 npm install
@@ -33,7 +33,7 @@ npm run preview
 ## 📁 Project Structure
 
 ```
-personal-os/
+bhaskar-kotakonda/
 ├── public/
 │   ├── icons/           # PWA icons
 │   ├── favicon.svg      # Site favicon
@@ -135,7 +135,7 @@ npm run build
 
 ## 📄 License
 
-MIT License - feel free to use this for your own Personal OS!
+MIT License - feel free to use this for your own Bhaskar Kotakonda!
 
 ---
 

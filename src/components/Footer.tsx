@@ -71,7 +71,7 @@ export default function Footer({ basePath = '/personal-os' }: FooterProps) {
           {/* Brand & Copyright */}
           <div className="text-center md:text-left">
             <p className="text-sm text-os-muted">
-              © {currentYear} Personal OS. All rights reserved.
+              © {currentYear} Bhaskar Kotakonda. All rights reserved.
             </p>
           </div>
 
