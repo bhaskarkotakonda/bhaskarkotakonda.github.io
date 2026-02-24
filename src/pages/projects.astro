@@ -1,0 +1,69 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+
+const projects = [
+  {
+    title: "Project Name",
+    description: "A brief description of what this project does and the problem it solves.",
+    tech: ["TypeScript", "React", "Node.js"],
+    link: "https://github.com/bhaskarkotakonda1",
+    status: "In Progress"
+  },
+  // Add more projects here
+];
+---
+
+<BaseLayout title="Projects" description="A collection of projects I've built and am working on.">
+  <section class="container-narrow py-20 md:py-32">
+    <!-- Header -->
+    <header class="mb-16">
+      <h1 class="text-4xl md:text-5xl font-extrabold mb-4">Projects</h1>
+      <p class="text-xl text-os-muted">
+        A collection of things I've built, am building, or have contributed to.
+      </p>
+    </header>
+
+    <!-- Projects Grid -->
+    <div class="space-y-8">
+      {projects.map((project) => (
+        <div class="p-6 border border-os-light rounded-lg hover:border-os-accent transition-colors">
+          <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-4 mb-4">
+            <div>
+              <h2 class="text-xl font-bold text-os-black">{project.title}</h2>
+              {project.status && (
+                <span class="inline-block mt-2 text-xs font-medium px-2 py-1 bg-os-accent/10 text-os-accent rounded">
+                  {project.status}
+                </span>
+              )}
+            </div>
+            {project.link && (
+              <a 
+                href={project.link} 
+                target="_blank" 
+                rel="noopener noreferrer"
+                class="text-sm font-medium text-os-accent hover:underline"
+              >
+                View Project →
+              </a>
+            )}
+          </div>
+          <p class="text-os-muted mb-4">{project.description}</p>
+          <div class="flex flex-wrap gap-2">
+            {project.tech.map((t) => (
+              <span class="text-xs font-medium px-2 py-1 bg-os-light rounded">
+                {t}
+              </span>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <!-- Empty State / Coming Soon -->
+    <div class="mt-12 p-8 bg-os-light/50 rounded-lg text-center">
+      <p class="text-os-muted">
+        More projects coming soon. Check out my <a href="https://github.com/bhaskarkotakonda1" target="_blank" rel="noopener noreferrer" class="text-os-accent hover:underline">GitHub</a> for the latest work.
+      </p>
+    </div>
+  </section>
+</BaseLayout>
