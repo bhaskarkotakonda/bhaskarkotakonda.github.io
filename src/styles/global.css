@@ -196,6 +196,27 @@
     @apply bg-transparent p-0;
   }
 
+  .prose table {
+    @apply w-full my-6 border-collapse;
+  }
+
+  .prose table th,
+  .prose table td {
+    @apply px-4 py-3 text-left border border-os-light;
+  }
+
+  .prose table th {
+    @apply bg-os-light font-semibold text-os-black;
+  }
+
+  .prose table tr:hover {
+    @apply bg-os-light/50;
+  }
+
+  .prose table td:first-child {
+    @apply font-medium text-os-black;
+  }
+
   .prose img {
     @apply rounded-lg my-6;
   }
