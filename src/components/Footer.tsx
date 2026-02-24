@@ -61,7 +61,7 @@ const footerLinks = [
   { href: '/contact', label: 'Contact' },
 ];
 
-export default function Footer({ basePath = '/personal-os' }: FooterProps) {
+export default function Footer({ basePath = '' }: FooterProps) {
   const currentYear = new Date().getFullYear();
 
   return (
