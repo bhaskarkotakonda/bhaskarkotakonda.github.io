@@ -12,44 +12,28 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
       </p>
     </header>
 
-    <!-- Signup Form -->
-    <div class="max-w-md mx-auto">
-      <form class="space-y-4" id="newsletter-form">
-        <div>
-          <label for="email" class="block text-sm font-medium mb-2">
-            Email Address
-          </label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            required
-            class="w-full px-4 py-3 border border-os-light rounded-lg focus:outline-none focus:ring-2 focus:ring-os-accent focus:border-transparent transition-all"
-            placeholder="you@example.com"
-          />
-        </div>
-        
-        <div>
-          <label for="name" class="block text-sm font-medium mb-2">
-            First Name (optional)
-          </label>
-          <input
-            type="text"
-            id="name"
-            name="name"
-            class="w-full px-4 py-3 border border-os-light rounded-lg focus:outline-none focus:ring-2 focus:ring-os-accent focus:border-transparent transition-all"
-            placeholder="Your name"
-          />
-        </div>
-        
-        <button type="submit" class="w-full btn-primary py-3">
-          Subscribe
-        </button>
-      </form>
+    <!-- Substack Embed -->
+    <div class="max-w-2xl mx-auto">
+      <iframe 
+        src="https://bhaskarkotakonda.substack.com/embed" 
+        width="100%" 
+        height="320" 
+        style="border:1px solid #EEE; background:white;" 
+        frameborder="0" 
+        scrolling="no">
+      </iframe>
+    </div>
 
-      <p class="mt-4 text-center text-sm text-os-muted">
-        No spam. Unsubscribe anytime.
-      </p>
+    <!-- Link to full Substack -->
+    <div class="mt-8 text-center">
+      <a 
+        href="https://bhaskarkotakonda.substack.com" 
+        target="_blank" 
+        rel="noopener noreferrer"
+        class="inline-flex items-center gap-2 text-os-accent hover:underline font-medium"
+      >
+        View full archive on Substack →
+      </a>
     </div>
 
     <!-- What to Expect -->
@@ -74,10 +58,8 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
         </li>
       </ul>
     </div>
-
-    <!-- Archive Preview -->
-    <div class="mt-16 pt-8 border-t border-os-light">
-      <h2 class="text-sm font-semibold text-os-muted uppercase tracking-wider mb-6">Recent Issues</h2>
+  </section>
+</BaseLayout>
       <div class="space-y-4">
         <p class="text-os-muted italic">Newsletter archive coming soon...</p>
       </div>
