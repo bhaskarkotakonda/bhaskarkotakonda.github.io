@@ -93,10 +93,25 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
             .register("/sw.js")
             .then((registration) => {
               console.log("SW registered:", registration);
+
+              // reload when a new service worker takes over
+              registration.addEventListener("updatefound", () => {
+                const newWorker = registration.installing;
+                newWorker.addEventListener("statechange", () => {
+                  if (newWorker.state === "installed" && navigator.serviceWorker.controller) {
+                    console.log("New SW installed, reloading page");
+                    window.location.reload();
+                  }
+                });
+              });
             })
             .catch((error) => {
               console.log("SW registration failed:", error);
             });
+
+          navigator.serviceWorker.addEventListener("controllerchange", () => {
+            window.location.reload();
+          });
         });
       }
     </script>
