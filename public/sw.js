@@ -1,14 +1,11 @@
 // Service Worker for Personal OS PWA
-const CACHE_VERSION = 'v3';
+const CACHE_VERSION = "v3";
 const SHELL_CACHE = `bhaskar-kotakonda-shell-${CACHE_VERSION}`;
 const STATIC_CACHE = `bhaskar-kotakonda-static-${CACHE_VERSION}`;
 const RUNTIME_CACHE = `bhaskar-kotakonda-runtime-${CACHE_VERSION}`;
 
 // Shell assets - cached on install
-const SHELL_ASSETS = [
-  '/offline.html',
-  '/manifest.json',
-];
+const SHELL_ASSETS = ["/offline.html", "/manifest.json"];
 
 // Static asset patterns (cache-first)
 const STATIC_PATTERNS = [
@@ -17,20 +14,17 @@ const STATIC_PATTERNS = [
 ];
 
 // API patterns (network-first)
-const API_PATTERNS = [
-  /^\/api\//,
-  /\/auth\//,
-];
+const API_PATTERNS = [/^\/api\//, /\/auth\//];
 
 // ─────────────────────────────────────────────────────────────
 // Install - Cache shell assets
 // ─────────────────────────────────────────────────────────────
-self.addEventListener('install', (event) => {
+self.addEventListener("install", (event) => {
   event.waitUntil(
     caches.open(SHELL_CACHE).then((cache) => {
-      console.log('[SW] Caching shell assets');
+      console.log("[SW] Caching shell assets");
       return cache.addAll(SHELL_ASSETS);
-    })
+    }),
   );
   self.skipWaiting();
 });
@@ -38,20 +32,24 @@ self.addEventListener('install', (event) => {
 // ─────────────────────────────────────────────────────────────
 // Activate - Clean old caches
 // ─────────────────────────────────────────────────────────────
-self.addEventListener('activate', (event) => {
+self.addEventListener("activate", (event) => {
   const currentCaches = [SHELL_CACHE, STATIC_CACHE, RUNTIME_CACHE];
-  
+
   event.waitUntil(
     caches.keys().then((cacheNames) => {
       return Promise.all(
         cacheNames
-          .filter((name) => name.startsWith('bhaskar-kotakonda-') && !currentCaches.includes(name))
+          .filter(
+            (name) =>
+              name.startsWith("bhaskar-kotakonda-") &&
+              !currentCaches.includes(name),
+          )
           .map((name) => {
-            console.log('[SW] Deleting old cache:', name);
+            console.log("[SW] Deleting old cache:", name);
             return caches.delete(name);
-          })
+          }),
       );
-    })
+    }),
   );
   self.clients.claim();
 });
@@ -59,12 +57,12 @@ self.addEventListener('activate', (event) => {
 // ─────────────────────────────────────────────────────────────
 // Fetch - Routing strategies
 // ─────────────────────────────────────────────────────────────
-self.addEventListener('fetch', (event) => {
+self.addEventListener("fetch", (event) => {
   const { request } = event;
   const url = new URL(request.url);
 
   // Skip non-GET and cross-origin
-  if (request.method !== 'GET') return;
+  if (request.method !== "GET") return;
   if (url.origin !== self.location.origin) return;
 
   // API calls - Network first
@@ -80,7 +78,7 @@ self.addEventListener('fetch', (event) => {
   }
 
   // HTML pages - Network first with offline fallback
-  if (request.mode === 'navigate') {
+  if (request.mode === "navigate") {
     event.respondWith(networkFirstWithOffline(request));
     return;
   }
@@ -106,7 +104,7 @@ async function cacheFirst(request, cacheName) {
     }
     return response;
   } catch {
-    return new Response('Asset unavailable offline', { status: 503 });
+    return new Response("Asset unavailable offline", { status: 503 });
   }
 }
 
@@ -122,9 +120,9 @@ async function networkFirst(request, cacheName) {
   } catch {
     const cached = await caches.match(request);
     if (cached) return cached;
-    return new Response(JSON.stringify({ error: 'Offline' }), {
+    return new Response(JSON.stringify({ error: "Offline" }), {
       status: 503,
-      headers: { 'Content-Type': 'application/json' },
+      headers: { "Content-Type": "application/json" },
     });
   }
 }
@@ -141,49 +139,51 @@ async function networkFirstWithOffline(request) {
   } catch {
     const cached = await caches.match(request);
     if (cached) return cached;
-    
+
     // Return offline page
-    const offlinePage = await caches.match('/offline.html');
+    const offlinePage = await caches.match("/offline.html");
     if (offlinePage) return offlinePage;
-    
-    return new Response('Offline', { status: 503 });
+
+    return new Response("Offline", { status: 503 });
   }
 }
 
 // ─────────────────────────────────────────────────────────────
 // Background Sync
 // ─────────────────────────────────────────────────────────────
-self.addEventListener('sync', (event) => {
-  if (event.tag === 'sync-data') {
-    console.log('[SW] Background sync triggered');
+self.addEventListener("sync", (event) => {
+  if (event.tag === "sync-data") {
+    console.log("[SW] Background sync triggered");
     event.waitUntil(notifyClientsToSync());
   }
 });
 
 async function notifyClientsToSync() {
-  const clients = await self.clients.matchAll({ type: 'window' });
+  const clients = await self.clients.matchAll({ type: "window" });
   clients.forEach((client) => {
-    client.postMessage({ type: 'SYNC_REQUESTED' });
+    client.postMessage({ type: "SYNC_REQUESTED" });
   });
 }
 
 // ─────────────────────────────────────────────────────────────
 // Message handling
 // ─────────────────────────────────────────────────────────────
-self.addEventListener('message', (event) => {
+self.addEventListener("message", (event) => {
   const { type, payload } = event.data || {};
 
   switch (type) {
-    case 'SKIP_WAITING':
+    case "SKIP_WAITING":
       self.skipWaiting();
       break;
-    case 'CACHE_URLS':
+    case "CACHE_URLS":
       if (payload?.urls) {
         caches.open(RUNTIME_CACHE).then((cache) => cache.addAll(payload.urls));
       }
       break;
-    case 'CLEAR_CACHE':
-      caches.keys().then((names) => names.forEach((name) => caches.delete(name)));
+    case "CLEAR_CACHE":
+      caches
+        .keys()
+        .then((names) => names.forEach((name) => caches.delete(name)));
       break;
   }
 });
@@ -191,28 +191,31 @@ self.addEventListener('message', (event) => {
 // ─────────────────────────────────────────────────────────────
 // Push notifications (placeholder)
 // ─────────────────────────────────────────────────────────────
-self.addEventListener('push', (event) => {
-  const data = event.data?.json() || { title: 'Personal OS', body: 'New update' };
-  
+self.addEventListener("push", (event) => {
+  const data = event.data?.json() || {
+    title: "Personal OS",
+    body: "New update",
+  };
+
   event.waitUntil(
     self.registration.showNotification(data.title, {
       body: data.body,
-      icon: '/icons/icon-192.png',
-      badge: '/icons/badge-72.png',
-      tag: data.tag || 'default',
-    })
+      icon: "/icons/icon-192.png",
+      badge: "/icons/badge-72.png",
+      tag: data.tag || "default",
+    }),
   );
 });
 
-self.addEventListener('notificationclick', (event) => {
+self.addEventListener("notificationclick", (event) => {
   event.notification.close();
   event.waitUntil(
-    self.clients.matchAll({ type: 'window' }).then((clients) => {
+    self.clients.matchAll({ type: "window" }).then((clients) => {
       if (clients.length > 0) {
         clients[0].focus();
       } else {
-        self.clients.openWindow('/');
+        self.clients.openWindow("/");
       }
-    })
+    }),
   );
 });
