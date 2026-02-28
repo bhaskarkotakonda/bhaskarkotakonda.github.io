@@ -74,6 +74,13 @@ export default function Footer({ basePath = '' }: FooterProps) {
   return (
     <footer className="border-t border-os-light bg-os-white">
       <div className="max-w-content mx-auto px-4 md:px-6 py-12">
+        <div className="mb-6 p-4 bg-yellow-50 border-l-4 border-yellow-400 rounded">
+          <h3 className="text-lg font-semibold text-os-black">Stay updated</h3>
+          <p className="text-os-muted mt-1">
+            Follow me on <a href="https://x.com/bhaskieboi" target="_blank" rel="noopener noreferrer" className="underline">Twitter</a> or subscribe via <a href="/rss.xml" className="underline">RSS</a> to get notified about new posts.
+          </p>
+        </div>
+
         <div className="flex flex-col md:flex-row justify-between items-center gap-6">
           {/* Brand & Copyright */}
           <div className="text-center md:text-left">
