@@ -18,7 +18,7 @@ import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://bhaskarkotakonda1.github.io',
+  site: 'https://bhaskarkotakonda.github.io',
   output: 'static',
   integrations: [
     react(),
