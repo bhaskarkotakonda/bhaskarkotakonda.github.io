@@ -17,7 +17,7 @@ interface FooterProps {
 
 const socialLinks: SocialLink[] = [
   {
-    href: "https://github.com",
+    href: "https://github.com/bhaskarkotakonda",
     label: "GitHub",
     icon: (
       <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -30,7 +30,7 @@ const socialLinks: SocialLink[] = [
     ),
   },
   {
-    href: "https://linkedin.com",
+    href: "https://www.linkedin.com/in/bhaskarkotakonda/",
     label: "LinkedIn",
     icon: (
       <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -39,7 +39,7 @@ const socialLinks: SocialLink[] = [
     ),
   },
   {
-    href: "https://twitter.com",
+    href: "https://x.com/bhaskieboi",
     label: "Twitter",
     icon: (
       <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -48,7 +48,7 @@ const socialLinks: SocialLink[] = [
     ),
   },
   {
-    href: "mailto:hello@example.com",
+    href: "mailto:bhaskar.sai12@gmail.com",
     label: "Email",
     icon: (
       <svg
@@ -69,7 +69,6 @@ const socialLinks: SocialLink[] = [
 ];
 
 const footerLinks = [
-  { href: "/privacy", label: "Privacy" },
   { href: "/contact", label: "Contact" },
 ];
 
