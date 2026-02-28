@@ -1,24 +1,30 @@
 ---
-import BaseLayout from '@/layouts/BaseLayout.astro';
-import { getCollection } from 'astro:content';
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { getCollection } from "astro:content";
 
-const posts = await getCollection('blog', ({ data }) => !data.draft);
-const sortedPosts = posts.sort((a, b) => 
-  new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
+const posts = await getCollection("blog", ({ data }) => !data.draft);
+const sortedPosts = posts.sort(
+  (a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime(),
 );
 
 // Group posts by year
-const postsByYear = sortedPosts.reduce((acc, post) => {
-  const year = new Date(post.data.date).getFullYear();
-  if (!acc[year]) acc[year] = [];
-  acc[year].push(post);
-  return acc;
-}, {} as Record<number, typeof sortedPosts>);
+const postsByYear = sortedPosts.reduce(
+  (acc, post) => {
+    const year = new Date(post.data.date).getFullYear();
+    if (!acc[year]) acc[year] = [];
+    acc[year].push(post);
+    return acc;
+  },
+  {} as Record<number, typeof sortedPosts>,
+);
 
 const years = Object.keys(postsByYear).sort((a, b) => Number(b) - Number(a));
 ---
 
-<BaseLayout title="Writing" description="Thoughts, tutorials, and reflections on technology and life.">
+<BaseLayout
+  title="Writing"
+  description="Thoughts, tutorials, and reflections on technology and life."
+>
   <section class="container-narrow py-20 md:py-32">
     <!-- Header -->
     <header class="mb-16">
@@ -27,63 +33,69 @@ const years = Object.keys(postsByYear).sort((a, b) => Number(b) - Number(a));
         Thoughts on building products, technology, and life.
       </p>
     </header>
-    
-    {sortedPosts.length === 0 ? (
-      <div class="py-16">
-        <p class="text-os-muted">No posts yet. Check back soon!</p>
-      </div>
-    ) : (
-      <div class="space-y-12">
-        {years.map((year) => (
-          <section>
-            <h2 class="text-sm font-semibold text-os-muted uppercase tracking-wider mb-6">
-              {year}
-            </h2>
-            <ul class="space-y-4">
-              {postsByYear[Number(year)].map((post) => {
-                const formattedDate = new Date(post.data.date).toLocaleDateString('en-US', {
-                  month: 'short',
-                  day: 'numeric',
-                });
-                
-                return (
-                  <li class="group">
-                    <a 
-                      href={`/writing/${post.slug}`}
-                      class="flex items-baseline justify-between gap-4 no-underline py-2 -mx-2 px-2 rounded hover:bg-os-light/50 transition-colors"
-                    >
-                      <span class="font-medium text-os-black group-hover:text-os-accent-hover transition-colors">
-                        {post.data.title}
-                      </span>
-                      <span class="text-sm text-os-muted whitespace-nowrap">
-                        {formattedDate}
-                      </span>
-                    </a>
-                  </li>
-                );
-              })}
-            </ul>
-          </section>
-        ))}
-      </div>
-    )}
 
-    <!-- Tags Section (if posts have tags) -->
-    {sortedPosts.some(p => p.data.tags?.length) && (
-      <div class="mt-16 pt-8 border-t border-os-light">
-        <h2 class="text-sm font-semibold text-os-muted uppercase tracking-wider mb-4">
-          Topics
-        </h2>
-        <div class="flex flex-wrap gap-2">
-          {[...new Set(sortedPosts.flatMap(p => p.data.tags || []))].map((tag) => (
-            <span class="px-3 py-1.5 bg-os-light text-os-dark text-sm rounded-full">
-              {tag}
-            </span>
+    {
+      sortedPosts.length === 0 ? (
+        <div class="py-16">
+          <p class="text-os-muted">No posts yet. Check back soon!</p>
+        </div>
+      ) : (
+        <div class="space-y-12">
+          {years.map((year) => (
+            <section>
+              <h2 class="text-sm font-semibold text-os-muted uppercase tracking-wider mb-6">
+                {year}
+              </h2>
+              <ul class="space-y-4">
+                {postsByYear[Number(year)].map((post) => {
+                  const formattedDate = new Date(
+                    post.data.date,
+                  ).toLocaleDateString("en-US", {
+                    month: "short",
+                    day: "numeric",
+                  });
+
+                  return (
+                    <li class="group">
+                      <a
+                        href={`/writing/${post.slug}`}
+                        class="flex items-baseline justify-between gap-4 no-underline py-2 -mx-2 px-2 rounded hover:bg-os-light/50 transition-colors"
+                      >
+                        <span class="font-medium text-os-black group-hover:text-os-accent-hover transition-colors">
+                          {post.data.title}
+                        </span>
+                        <span class="text-sm text-os-muted whitespace-nowrap">
+                          {formattedDate}
+                        </span>
+                      </a>
+                    </li>
+                  );
+                })}
+              </ul>
+            </section>
           ))}
         </div>
-      </div>
-    )}
+      )
+    }
 
-    
+    <!-- Tags Section (if posts have tags) -->
+    {
+      sortedPosts.some((p) => p.data.tags?.length) && (
+        <div class="mt-16 pt-8 border-t border-os-light">
+          <h2 class="text-sm font-semibold text-os-muted uppercase tracking-wider mb-4">
+            Topics
+          </h2>
+          <div class="flex flex-wrap gap-2">
+            {[...new Set(sortedPosts.flatMap((p) => p.data.tags || []))].map(
+              (tag) => (
+                <span class="px-3 py-1.5 bg-os-light text-os-dark text-sm rounded-full">
+                  {tag}
+                </span>
+              ),
+            )}
+          </div>
+        </div>
+      )
+    }
   </section>
 </BaseLayout>

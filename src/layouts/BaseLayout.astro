@@ -14,9 +14,9 @@
  *   - description (string, optional) — Meta description / OG description
  *   - image       (string, optional) — OG image path (defaults to /og-image.png)
  */
-import Navbar from '@/components/Navbar.astro';
-import Footer from '@/components/Footer.tsx';
-import '@/styles/global.css';
+import Navbar from "@/components/Navbar.astro";
+import Footer from "@/components/Footer.tsx";
+import "@/styles/global.css";
 
 interface Props {
   title: string;
@@ -24,10 +24,10 @@ interface Props {
   image?: string;
 }
 
-const { 
-  title, 
-  description = 'Bhaskar Kotakonda - A digital home for thoughts, work, and experiments',
-  image = '/og-image.png'
+const {
+  title,
+  description = "Bhaskar Kotakonda - A digital home for thoughts, work, and experiments",
+  image = "/og-image.png",
 } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
@@ -39,38 +39,41 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="generator" content={Astro.generator} />
-    
+
     <!-- Primary Meta Tags -->
     <title>{title} | Bhaskar Kotakonda</title>
     <meta name="title" content={`${title} | Bhaskar Kotakonda`} />
     <meta name="description" content={description} />
     <link rel="canonical" href={canonicalURL} />
-    
+
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content={canonicalURL} />
     <meta property="og:title" content={`${title} | Bhaskar Kotakonda`} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={image} />
-    
+
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image" />
     <meta property="twitter:url" content={canonicalURL} />
     <meta property="twitter:title" content={`${title} | Bhaskar Kotakonda`} />
     <meta property="twitter:description" content={description} />
     <meta property="twitter:image" content={image} />
-    
+
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    
+
     <!-- PWA -->
     <link rel="manifest" href="/manifest.json" />
     <meta name="theme-color" content="#0a0a0a" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
     <meta name="apple-mobile-web-app-title" content="Bhaskar Kotakonda" />
     <link rel="apple-touch-icon" href="/icons/icon-192x192.png" />
-    
+
     <!-- Preconnect for performance -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -81,17 +84,18 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
       <slot />
     </main>
     <Footer />
-    
+
     <!-- Service Worker Registration -->
     <script>
-      if ('serviceWorker' in navigator) {
-        window.addEventListener('load', () => {
-          navigator.serviceWorker.register('/sw.js')
+      if ("serviceWorker" in navigator) {
+        window.addEventListener("load", () => {
+          navigator.serviceWorker
+            .register("/sw.js")
             .then((registration) => {
-              console.log('SW registered:', registration);
+              console.log("SW registered:", registration);
             })
             .catch((error) => {
-              console.log('SW registration failed:', error);
+              console.log("SW registration failed:", error);
             });
         });
       }
