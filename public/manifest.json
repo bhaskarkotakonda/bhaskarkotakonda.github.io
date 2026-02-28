@@ -4,10 +4,25 @@
   "description": "A personal operating system for the web - portfolio, blog, and more",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#fafafa",
+  "background_color": "#ffffff",
   "theme_color": "#0a0a0a",
+  "categories": ["productivity", "utilities"],
   "orientation": "portrait-primary",
   "scope": "/",
+  "screenshots": [
+    {
+      "src": "/icons/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "form_factor": "narrow"
+    },
+    {
+      "src": "/icons/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "form_factor": "wide"
+    }
+  ],
   "icons": [
     {
       "src": "/icons/icon-72x72.png",
