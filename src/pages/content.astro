@@ -1,78 +1,75 @@
 ---
-import BaseLayout from '@/layouts/BaseLayout.astro';
+import BaseLayout from "@/layouts/BaseLayout.astro";
 
 const categories = [
   {
     title: "Videos",
-    description: "Talks, tutorials, and video content I've created or appeared in.",
-    items: [
-      { title: "Coming soon...", link: null }
-    ]
+    description:
+      "Talks, tutorials, and video content I've created or appeared in.",
+    items: [{ title: "Coming soon...", link: null }],
   },
   {
     title: "Podcasts",
     description: "Podcast episodes and audio content.",
-    items: [
-      { title: "Coming soon...", link: null }
-    ]
+    items: [{ title: "Coming soon...", link: null }],
   },
   {
     title: "Talks & Presentations",
     description: "Conference talks and presentations.",
-    items: [
-      { title: "Coming soon...", link: null }
-    ]
+    items: [{ title: "Coming soon...", link: null }],
   },
   {
     title: "Interviews",
     description: "Interviews and features.",
-    items: [
-      { title: "Coming soon...", link: null }
-    ]
-  }
+    items: [{ title: "Coming soon...", link: null }],
+  },
 ];
 ---
 
-<BaseLayout title="Essential Content" description="Videos, podcasts, talks, and other media content.">
+<BaseLayout
+  title="Essential Content"
+  description="Videos, podcasts, talks, and other media content."
+>
   <section class="container-narrow py-20 md:py-32">
     <!-- Header -->
     <header class="mb-16">
-      <h1 class="text-4xl md:text-5xl font-extrabold mb-4">Essential Content</h1>
+      <h1 class="text-4xl md:text-5xl font-extrabold mb-4">
+        Essential Content
+      </h1>
       <p class="text-xl text-os-muted">
-        Videos, podcasts, talks, and other media content I've created or been featured in.
+        Videos, podcasts, talks, and other media content I've created or been
+        featured in.
       </p>
     </header>
 
     <!-- Categories -->
     <div class="space-y-12">
-      {categories.map((category) => (
-        <div>
-          <h2 class="text-2xl font-bold mb-2">{category.title}</h2>
-          <p class="text-os-muted mb-6">{category.description}</p>
-          <ul class="space-y-3">
-            {category.items.map((item) => (
-              <li class="p-4 bg-os-light/50 rounded-lg">
-                {item.link ? (
-                  <a href={item.link} target="_blank" rel="noopener noreferrer" class="font-medium hover:text-os-accent">
-                    {item.title} ↗
-                  </a>
-                ) : (
-                  <span class="text-os-muted italic">{item.title}</span>
-                )}
-              </li>
-            ))}
-          </ul>
-        </div>
-      ))}
-    </div>
-
-    <!-- CTA -->
-    <div class="mt-16 p-6 bg-os-accent/10 border-l-4 border-os-accent rounded-r-lg">
-      <p class="font-semibold text-os-black mb-2">Want me to speak or appear on your podcast?</p>
-      <p class="text-os-muted text-sm">
-        I enjoy discussing technology, product development, and AI. 
-        <a href="/contact">Reach out</a> to discuss opportunities.
-      </p>
+      {
+        categories.map((category) => (
+          <div>
+            <h2 class="text-2xl font-bold mb-2">{category.title}</h2>
+            <p class="text-os-muted mb-6">{category.description}</p>
+            <ul class="space-y-3">
+              {category.items.map((item) => (
+                <li class="p-4 bg-os-light/50 rounded-lg">
+                  {item.link ? (
+                    <a
+                      href={item.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="font-medium hover:text-os-accent"
+                    >
+                      {item.title} ↗
+                    </a>
+                  ) : (
+                    <span class="text-os-muted italic">{item.title}</span>
+                  )}
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))
+      }
     </div>
   </section>
 </BaseLayout>
