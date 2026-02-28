@@ -1,12 +1,11 @@
 // Service Worker for Personal OS PWA
-const CACHE_VERSION = 'v2';
+const CACHE_VERSION = 'v3';
 const SHELL_CACHE = `bhaskar-kotakonda-shell-${CACHE_VERSION}`;
 const STATIC_CACHE = `bhaskar-kotakonda-static-${CACHE_VERSION}`;
 const RUNTIME_CACHE = `bhaskar-kotakonda-runtime-${CACHE_VERSION}`;
 
 // Shell assets - cached on install
 const SHELL_ASSETS = [
-  '/',
   '/offline.html',
   '/manifest.json',
 ];
