@@ -97,15 +97,17 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
               // reload when a new service worker takes over
               registration.addEventListener("updatefound", () => {
                 const newWorker = registration.installing;
-                newWorker.addEventListener("statechange", () => {
-                  if (
-                    newWorker.state === "installed" &&
-                    navigator.serviceWorker.controller
-                  ) {
-                    console.log("New SW installed, reloading page");
-                    window.location.reload();
-                  }
-                });
+                if (newWorker) {
+                  newWorker.addEventListener("statechange", () => {
+                    if (
+                      newWorker.state === "installed" &&
+                      navigator.serviceWorker.controller
+                    ) {
+                      console.log("New SW installed, reloading page");
+                      window.location.reload();
+                    }
+                  });
+                }
               });
             })
             .catch((error) => {
