@@ -21,7 +21,7 @@ The goal is to build a "Personal Backend OS" integrated directly into my existin
 1.  **Hosting**: Vercel. We are migrating the Astro site from GitHub Pages (static) to Vercel (SSR) to support server APIs.
 2.  **Database**: Supabase (Free Tier: 500MB DB). If data exceeds 500MB long-term, older raw text data can be archived, though 500MB is enough for ~100,000 text bookmarks.
 3.  **Authentication**: Clerk (Free Tier). 
-4.  **AI Engine**: Google Gemini API (Using Gemini 1.5 Pro).
+4.  **AI Engine**: Google Gemini API (Use the most capable stable model available at implementation time natively, but access it through an abstraction layer).
 5.  **Messaging Portal**: Telegram Bot API (100% Free).
 
 ### 2.2 Environment Variables (To be stored in `.env`)
@@ -29,6 +29,13 @@ The goal is to build a "Personal Backend OS" integrated directly into my existin
 # Clerk Auth
 PUBLIC_CLERK_PUBLISHABLE_KEY=pk_...
 CLERK_SECRET_KEY=sk_...
+
+# App AuthZ
+PERSONAL_OS_ALLOWED_USER_IDS=user_...
+
+# Operational Security
+CRON_SECRET=replace_with_long_random_value
+TELEGRAM_ALLOWED_CHAT_ID=123456789
 
 # Supabase
 PUBLIC_SUPABASE_URL=https://...supabase.co
@@ -49,9 +56,13 @@ GEMINI_API_KEY=AIza...
 
 *   **Framework**: Astro (configured for `output: 'server'` with the Vercel adapter).
 *   **Frontend UI**: React components styled with the existing `tailwind.config.js`.
-*   **Security Boundary**: 
+*   **Security & Execution Boundary**: 
     *   `/` (Public Portfolio) -> Remains accessible to the world.
-    *   `/os/*` (The Brain) -> Protected by Clerk middleware. Any unauthenticated access to these routes, or API endpoints under `/api/os/*`, must redirect or return 401 Unauthorized. It is impossible to share a "corrupted" or unauthorized link, as Clerk strictly enforces session validation.
+    *   `/os/*` (The Brain) -> Protected by Clerk middleware AND a server-side authorization check against `PERSONAL_OS_ALLOWED_USER_IDS`. Any unauthenticated access must return 401 Unauthorized.
+    *   `/api/webhooks/telegram` -> Publicly reachable by Telegram only. Must NOT use Clerk auth. Protected by webhook secret validation and Telegram chat allowlist checks.
+    *   `/api/process-queue` -> Non-public operational endpoint invoked by Vercel triggers or Queues. Protected by a verification secret.
+*   **Processing State Model**: Inbox rows must move through explicit states: `pending`, `processing`, `processed`, `failed`.
+*   **Idempotency Requirement**: All ingestion and processing handlers must be safe to retry without creating duplicate records or double-processing the same row.
 
 ---
 
@@ -63,26 +74,36 @@ GEMINI_API_KEY=AIza...
 
 1.  **Telegram Bot (Primary Mobile Interface)**:
     *   *Workflow*: I message my private Telegram bot with a link, text, or audio note. Telegram hits our Vercel API endpoint (`/api/webhooks/telegram`). 
-    *   *Processing*: The API extracts the payload, validates the webhook secret, and inserts the raw message into the Supabase `Raw_Inbox` table.
+    *   *Processing*: The API extracts the payload, validates the webhook secret, verifies the sender chat, and inserts the normalized message into the Supabase `Raw_Inbox` table.
+    *   *UX Feedback (Crucial)*: The webhook must synchronously reply with an immediate acknowledgment (e.g., "✅ Received", or an error message if parsing fails) before closing the connection, preventing a "black hole" user experience.
+    *   *Multi-URL Handling*: If a text message contains multiple links, the ingestion layer must split them and insert them as independent `Raw_Inbox` rows.
 2.  **Platform Scraping Constraints & Costs**:
-    *   *Twitter/Reddit*: X API is prohibitively expensive. *Strategy*: Fallback to manual ingestion via Telegram (sharing the tweet to the bot).
-    *   *LinkedIn*: Scraping is unreliable due to strict bot protection. *Strategy*: Manual sharing to Telegram.
-    *   *YouTube*: When a YouTube link is sent to Telegram, a background Vercel serverless function uses `youtube-transcript-api` (Free Python/JS package) to pull the captions.
-    *   *Newsletters*: Set up a free forwarding rule (e.g., via Cloudflare Email Routing) to an email parser endpoint that dumps the HTML body into `Raw_Inbox`.
+    *   *Twitter/Reddit/LinkedIn*: Fallback to manual ingestion via Telegram (sharing the tweet/post to the bot).
+    *   *YouTube*: When a YouTube link is sent, attempt to use `youtube-transcript-api`. If retrieval fails (due to IP blocks or unavailable captions), do not crash. Fallback to sending the raw YouTube URL to the Gemini API, leveraging its native multimodal video understanding capabilities.
+3.  **Raw Inbox Schema Requirements**:
+    *   Each row must capture at minimum: `id`, `source`, `source_message_id`, `source_chat_id`, `content_text`, `canonical_url`, `processing_status`, `retry_count`, `last_error`, `received_at`.
+    *   Add uniqueness constraints on source identifiers to prevent duplicate ingestion during webhook retries.
 
 ### Module B: The AI Processing Agent
 
 *How data is synthesized.*
 
-1.  **The Cron Job**: Vercel Cron triggers `/api/cron/process-inbox` every 6 hours.
-2.  **Deduplication (Phase 1)**: Simple URL canonicalization. (Semantic Vector Deduplication via pgvector is deferred to Phase V2 to reduce initial complexity).
-3.  **LLM Processing**: The script fetches unprocessed rows from `Raw_Inbox` and sends them to Gemini 1.5 Pro with a strict JSON schema prompt.
-4.  **Data Extraction**: Gemini returns:
+1.  **Event-Driven & On-Demand Processing**: 
+    *   Processing should be triggerable near real-time. Do not rely exclusively on a 6-hour cron.
+    *   Implement an asynchronous task queue trigger (e.g., Vercel background functions, Inngest, or a Supabase Webhook) upon new Telegram ingestion.
+    *   Provide a explicit "Process Now" button in the Dashboard UI to manually flush the `pending` queue.
+2.  **Deduplication**: Simple URL canonicalization plus source-level uniqueness checks.
+3.  **LLM Processing Engine**: 
+    *   The script fetches `pending` rows from `Raw_Inbox` and atomically marks them `processing`.
+    *   *AIService Abstraction*: Do not hardcode direct Gemini API class calls in the processing loop. Build a generic `AIService` interface boundary (`src/os/lib/ai.ts`). If we swap to Claude tomorrow, only the adapter changes.
+    *   *Token Limit Safety*: Implement rough token estimation during pre-processing. If the input exceeds the context window (or output chunking), implement truncation or map-reduce patterns, and gracefully handle malformed JSON schema rejections from the LLM.
+4.  **Data Extraction**: The AIService returns:
     *   `Title`, `Summary` (TL;DR).
     *   `Tags` (e.g., "Engineering", "Life", "Finance").
-    *   `Importance_Score` (1-10): Based on a config file (`src/os/ai_config.ts`) that I can edit directly in the repo to define what is currently "important" to me.
+    *   `Importance_Score` (1-10): This rubric must be evaluated dynamically by querying a `User_Preferences` Supabase table. The definition of "what is important to me" should live in the DB, not a static codebase file, allowing changes via a future Settings UI.
     *   `Actionable_Takeaways`: List of bullet points.
-5.  **Study Mode Generation**: If `Importance_Score` > 8, Gemini generates a deep-dive "Study Guide" (markdown formatted) containing core concepts and mental models extracted from the piece.
+5.  **Study Mode Generation**: If `Importance_Score` > 8, generate a deep-dive "Study Guide" (markdown formatted). 
+6.  **Failure Handling**: If processing fails, row moves to `failed`, stores a sanitized `last_error`, and increments `retry_count`. Retries must be bounded.
 
 ### Module C: The Frontend OS (UI Specifications)
 
@@ -91,6 +112,7 @@ GEMINI_API_KEY=AIza...
 *   **Command Center (`/os/dashboard`)**:
     *   A mobile-optimized, feed-style view showing recently processed items with `Importance_Score` > 6.
     *   Visuals: Clean cards with the original context link, tags, and the TL;DR.
+    *   UI Element: "Process Pending Queue" trigger button.
 *   **The Library (`/os/library`)**:
     *   A searchable data table/grid of all processed content.
     *   Filter dropdowns for Tags and Importance thresholds.
@@ -99,54 +121,27 @@ GEMINI_API_KEY=AIza...
 
 ---
 
-## 5. Visual Workflows
-
-### Data Capture Workflow
-```mermaid
-sequenceDiagram
-    participant User
-    participant Telegram
-    participant Vercel API
-    participant Supabase
-    User->>Telegram: Sends Link/Note
-    Telegram->>Vercel API: Webhook Triggered
-    Vercel API->>Vercel API: Validate Auth/Secret
-    Vercel API->>Supabase: Insert into Raw_Inbox table
-```
-
-### AI Processing Workflow
-```mermaid
-sequenceDiagram
-    participant Vercel Cron
-    participant API Endpoint
-    participant Supabase
-    participant Gemini API
-    Vercel Cron->>API Endpoint: Trigger every 6 hours
-    API Endpoint->>Supabase: Fetch Unprocessed Items
-    API Endpoint->>Gemini API: Send Content + Prompt Schema
-    Gemini API-->>API Endpoint: Return JSON (Summary, Score, Tags)
-    API Endpoint->>Supabase: Update Item & Mark Processed
-```
-
----
-
-## 6. Execution Instructions (For the AI)
+## 5. Execution Instructions (For the AI)
 
 *Start implementation in this exact order. Do not skip steps.*
 
 *   **Phase 1: Foundation & Auth**
     1.  Update `astro.config.mjs` to standard Vercel SSR.
-    2.  Install `@clerk/astro` and implement middleware to firmly block `/os/*`.
-    3.  Build a wireframe `/os/dashboard` that proves auth works.
+    2.  Install `@clerk/astro` and implement middleware.
+    3.  Add definitive server-side authorization checks against `PERSONAL_OS_ALLOWED_USER_IDS` to harden the private OS routes.
+    4.  Build a wireframe `/os/dashboard` that proves auth works.
 *   **Phase 2: Database Layer**
-    1.  Provide the exact SQL commands to run in the Supabase SQL Editor to create `Raw_Inbox` and `Processed_Nodes` tables.
-    2.  Write a Supabase generic client utility in `src/os/lib/supabase.ts`.
+    1.  Provide the exact SQL commands to run in Supabase to create `Raw_Inbox`, `Processed_Nodes`, and `User_Preferences` tables, including state fields and uniqueness constraints.
+    2.  Write a Supabase generic client utility logically separating Admin/Service roles.
 *   **Phase 3: Telegram Webhook**
     1.  Build `/pages/api/webhooks/telegram.ts`.
-    2.  Write text parsing to extract URLs from incoming bot messages.
-*   **Phase 4: The Brain (Gemini)**
-    1.  Create `src/os/ai_config.ts` so the user can define importance rules.
-    2.  Build `/pages/api/cron/process.ts` that calls Gemini and updates the DB.
+    2.  Implement synchronous Telegram chat acknowledgments to fix the UX "black hole".
+    3.  Write logic to split multi-URL messages into explicit individual queue rows.
+*   **Phase 4: The Brain (AI Processing)**
+    1.  Build the generic `AIService` abstraction boundary in `src/os/lib/ai.ts`.
+    2.  Build `/pages/api/process-queue.ts` (Event-driven worker) that fetches user priorities from the DB, calls the `AIService`, and updates states.
+    3.  Implement token-limit truncation strategies and bounded retries.
 *   **Phase 5: UI & UX**
     1.  Implement the React components for the Dashboard, mapping the existing Tailwind design variables to the new OS cards.
-    2.  Implement the Study Mode renderer.
+    2.  Implement the on-demand "Process Now" queue trigger in the UI.
+    3.  Implement the Study Mode renderer.
