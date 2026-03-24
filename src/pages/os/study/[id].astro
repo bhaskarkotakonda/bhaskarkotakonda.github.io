@@ -1,0 +1,77 @@
+---
+import "../../../styles/global.css";
+import { getSupabaseAdmin } from "../../../os/lib/supabase";
+import { marked } from "marked";
+
+const { id } = Astro.params;
+
+if (!id) return Astro.redirect("/os/library");
+
+const supabase = getSupabaseAdmin();
+
+const { data: node } = await supabase
+  .from("Processed_Nodes")
+  .select("*")
+  .eq("id", id)
+  .single();
+
+if (!node) return new Response("Not found", { status: 404 });
+
+const parsedMarkdown = node.study_guide_markdown ? marked.parse(node.study_guide_markdown) : null;
+---
+<html lang="en" class="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>{node.title} | Study Mode</title>
+  </head>
+  <body class="bg-[#0b0c10] text-[#c5c6c7] min-h-screen font-sans selection:bg-[#66fcf1] selection:text-black">
+    
+    <div class="fixed top-0 w-full bg-[#0b0c10]/95 backdrop-blur-md border-b border-[#1f2833] z-50 shadow-md">
+      <div class="max-w-4xl mx-auto px-6 py-4 flex justify-between items-center">
+        <a href="/os/library" class="text-sm font-bold text-gray-400 hover:text-[#66fcf1] transition uppercase tracking-widest">&larr; DB</a>
+        {node.canonical_url && (
+            <a href={node.canonical_url} target="_blank" class="px-4 py-1.5 bg-[#45a29e]/10 text-[#45a29e] border border-[#45a29e]/30 hover:bg-[#45a29e] hover:text-black rounded-lg text-xs font-bold transition shadow-sm uppercase tracking-wider">Source Link</a>
+        )}
+      </div>
+    </div>
+
+    <main class="max-w-3xl mx-auto px-6 pt-32 pb-32">
+      <header class="mb-14 border-b border-[#1f2833] pb-12">
+        <h1 class="text-4xl md:text-5xl font-black text-white leading-tight mb-6">{node.title}</h1>
+        <div class="bg-gradient-to-r from-[#1f2833]/50 to-transparent p-6 rounded-2xl border-l-[3px] border-[#45a29e] text-lg leading-relaxed text-gray-300 italic">
+          {node.summary}
+        </div>
+        
+        <div class="mt-8 flex gap-3 flex-wrap">
+          <span class={`px-3 py-1 rounded-full text-xs font-black uppercase tracking-widest border ${node.importance_score >= 8 ? 'bg-[#66fcf1]/10 text-[#66fcf1] border-[#66fcf1]/20' : 'bg-[#1f2833] text-gray-400 border-gray-800'}`}>Score: {node.importance_score}</span>
+          {(node.tags || []).map((t: string) => (
+             <span class="px-3 py-1 bg-black/50 border border-[#1f2833] rounded-full text-xs font-bold text-gray-500 uppercase tracking-widest">#{t}</span>
+          ))}
+        </div>
+      </header>
+      
+      {parsedMarkdown ? (
+        <article class="prose prose-invert prose-lg max-w-none prose-headings:text-white prose-a:text-[#66fcf1] prose-strong:text-white prose-code:text-[#45a29e] prose-pre:bg-[#1f2833] prose-pre:border prose-pre:border-gray-800" set:html={parsedMarkdown} />
+      ) : (
+        <div class="space-y-10">
+          <div>
+            <h2 class="text-2xl font-black text-white mb-6 tracking-tight">Key Takeaways</h2>
+            <ul class="space-y-4">
+              {(node.actionable_takeaways || []).map((t: string) => (
+                <li class="flex items-start gap-5 p-5 bg-[#1f2833]/30 rounded-2xl border border-[#1f2833] hover:border-[#45a29e]/30 transition-colors">
+                  <span class="text-[#66fcf1] mt-1 font-black">&rarr;</span>
+                  <span class="text-gray-300 leading-relaxed text-lg font-medium">{t}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div class="p-8 bg-black/40 border border-gray-800 border-dashed rounded-3xl text-gray-500 text-center font-mono text-sm max-w-lg mx-auto">
+            Importance score is below the Study Guide threshold required to trigger the deep-dive markdown generation engine.
+          </div>
+        </div>
+      )}
+    </main>
+
+  </body>
+</html>

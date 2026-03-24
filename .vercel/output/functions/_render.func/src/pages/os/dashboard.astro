@@ -1,0 +1,34 @@
+---
+import { UserButton } from "@clerk/astro/components";
+
+// Server-side block
+const userIds = import.meta.env.PERSONAL_OS_ALLOWED_USER_IDS;
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Personal OS Dashboard</title>
+  </head>
+  <body class="bg-gray-900 text-gray-100 min-h-screen p-8">
+    <div class="max-w-4xl mx-auto">
+      <header class="flex justify-between items-center mb-12">
+        <h1 class="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-indigo-500">
+          Personal OS Command Center
+        </h1>
+        <UserButton />
+      </header>
+      
+      <main class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="bg-gray-800 p-6 rounded-xl border border-gray-700 shadow-lg">
+          <h2 class="text-xl font-semibold mb-4 text-white">System Status</h2>
+          <p class="text-gray-400">Authentication is active. Welcome back!</p>
+          <div class="mt-4 p-4 bg-gray-900 rounded border border-gray-800 text-sm font-mono text-green-400 overflow-hidden text-ellipsis">
+            Configured Allowed Users: <br/>{userIds?.substring(0, 15)}...
+          </div>
+        </div>
+      </main>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,45 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Privacy Policy">
+  <section class="container-narrow py-16 md:py-24">
+    <h1 class="text-4xl font-bold mb-8">Privacy Policy</h1>
+    
+    <div class="prose">
+      <p class="text-os-muted mb-8">
+        Last updated: {new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+      </p>
+      
+      <h2>Overview</h2>
+      <p>
+        This website respects your privacy. This policy explains how we collect, 
+        use, and protect any information that you provide when using this website.
+      </p>
+      
+      <h2>Information We Collect</h2>
+      <p>
+        This is a static website. We do not collect personal information unless 
+        you voluntarily provide it through contact forms or newsletter signups.
+      </p>
+      
+      <h2>Cookies</h2>
+      <p>
+        This website may use minimal cookies for analytics purposes. You can 
+        disable cookies in your browser settings.
+      </p>
+      
+      <h2>Third-Party Services</h2>
+      <p>
+        We may use third-party services for analytics. These services have their 
+        own privacy policies.
+      </p>
+      
+      <h2>Contact</h2>
+      <p>
+        If you have questions about this privacy policy, please contact us at{' '}
+        <a href="mailto:hello@yourdomain.com">hello@yourdomain.com</a>.
+      </p>
+    </div>
+  </section>
+</BaseLayout>

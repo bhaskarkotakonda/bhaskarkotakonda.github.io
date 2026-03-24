@@ -1,0 +1,77 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+  title="Newsletter"
+  description="Subscribe to get updates on my latest writing and projects."
+>
+  <section class="container-narrow py-20 md:py-32">
+    <!-- Header -->
+    <header class="mb-12 text-center">
+      <h1 class="text-4xl md:text-5xl font-extrabold mb-4">Newsletter</h1>
+      <p class="text-xl text-os-muted max-w-lg mx-auto">
+        Join my newsletter for occasional updates on technology, product
+        building, and life lessons.
+      </p>
+    </header>
+
+    <!-- Substack Embed -->
+    <div class="max-w-2xl mx-auto">
+      <iframe
+        src="https://bhaskarkotakonda.substack.com/embed"
+        width="100%"
+        height="320"
+        style="border:1px solid #EEE; background:white; overflow:hidden;"
+        loading="lazy"
+        title="Substack embed"></iframe>
+    </div>
+
+    <!-- Link to full Substack -->
+    <div class="mt-8 text-center">
+      <a
+        href="https://bhaskarkotakonda.substack.com"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-flex items-center gap-2 text-os-accent hover:underline font-medium"
+      >
+        View full archive on Substack →
+      </a>
+    </div>
+
+    <!-- What to Expect -->
+    <div class="mt-16 max-w-lg mx-auto">
+      <h2
+        class="text-sm font-semibold text-os-muted uppercase tracking-wider mb-6 text-center"
+      >
+        What You'll Get
+      </h2>
+      <ul class="space-y-4">
+        <li class="flex items-start gap-3">
+          <span class="text-os-accent font-bold">→</span>
+          <span class="text-os-dark"
+            >Deep dives on AI, product development, and technology trends</span
+          >
+        </li>
+        <li class="flex items-start gap-3">
+          <span class="text-os-accent font-bold">→</span>
+          <span class="text-os-dark"
+            >Personal reflections on building and creating</span
+          >
+        </li>
+        <li class="flex items-start gap-3">
+          <span class="text-os-accent font-bold">→</span>
+          <span class="text-os-dark"
+            >Curated links and resources I find valuable</span
+          >
+        </li>
+        <li class="flex items-start gap-3">
+          <span class="text-os-accent font-bold">→</span>
+          <span class="text-os-dark"
+            >Early access to new projects and writing</span
+          >
+        </li>
+      </ul>
+    </div>
+  </section>
+</BaseLayout>

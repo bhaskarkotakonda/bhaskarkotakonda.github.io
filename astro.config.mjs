@@ -15,12 +15,16 @@ import react from "@astrojs/react";
 import tailwind from "@astrojs/tailwind";
 import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
+import vercel from '@astrojs/vercel/serverless';
+import clerk from '@clerk/astro';
 
 // https://astro.build/config
 export default defineConfig({
   site: "https://bhaskarkotakonda.github.io",
-  output: "static",
+  output: "server",
+  adapter: vercel(),
   integrations: [
+    clerk(),
     react(),
     tailwind({
       applyBaseStyles: false,
@@ -35,6 +39,7 @@ export default defineConfig({
     },
   },
   vite: {
+    server: { allowedHosts: true },
     ssr: {
       noExternal: ["react-icons"],
     },

@@ -1,0 +1,37 @@
+---
+import "../../styles/global.css";
+import { UserButton } from "@clerk/astro/components";
+import { getSupabaseAdmin } from "../../os/lib/supabase";
+import OsLibraryTable from "../../components/OsLibraryTable";
+
+const supabase = getSupabaseAdmin();
+
+// Fetch all Processed Nodes
+const { data: allNodes } = await supabase
+  .from("Processed_Nodes")
+  .select("*")
+  .order("created_at", { ascending: false });
+---
+<html lang="en" class="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Knowledge OS Library</title>
+  </head>
+  <body class="bg-[#0b0c10] text-[#c5c6c7] min-h-screen font-sans selection:bg-[#66fcf1] selection:text-black">
+    <div class="max-w-6xl mx-auto px-4 sm:px-8 py-12">
+      <header class="flex justify-between items-center mb-10 border-b border-[#1f2833] pb-6">
+         <div class="flex items-center gap-6">
+            <a href="/os/dashboard" class="text-2xl hover:text-[#66fcf1] transition-colors p-2 -ml-2 rounded-lg hover:bg-[#1f2833]">←</a>
+            <div>
+              <h1 class="text-3xl font-extrabold tracking-tight text-white mb-1">Knowledge Library</h1>
+              <p class="text-sm text-[#45a29e] font-mono tracking-tight">The immutable vault of parsed intelligence.</p>
+            </div>
+         </div>
+         <UserButton />
+      </header>
+
+      <OsLibraryTable client:load initialNodes={allNodes || []} />
+    </div>
+  </body>
+</html>

@@ -1,0 +1,145 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+
+const projects = [
+  {
+    title: "Bhaskar Kotakonda",
+    period: "2025 - Present",
+    role: "Creator",
+    description: "A digital operating system for life—combining personal knowledge management, task tracking, and habit building into one cohesive system. Built with Astro, React, and a focus on speed and simplicity.",
+    problem: "Information scattered across too many apps makes it hard to think clearly.",
+    solution: "One unified system that puts your data in one place with fast search and smart connections.",
+    impact: "Daily driver for managing projects, writing, and learning.",
+    tags: ["Astro", "React", "TypeScript", "PWA"],
+    link: "#"
+  },
+  {
+    title: "Developer Analytics Platform",
+    period: "2023 - 2024",
+    role: "Lead Engineer",
+    description: "Real-time analytics platform helping engineering teams understand their development workflows. Processes millions of events daily to surface actionable insights.",
+    problem: "Engineering teams lack visibility into where time goes and where bottlenecks exist.",
+    solution: "Automated data collection with ML-powered insights delivered where developers work.",
+    impact: "Reduced average PR review time by 40% for teams using the platform.",
+    tags: ["Python", "PostgreSQL", "React", "ML"],
+    link: null
+  },
+  {
+    title: "AI Writing Assistant",
+    period: "2023",
+    role: "Technical Lead",
+    description: "An AI-powered writing tool that helps users write clearer, more concise prose. Uses fine-tuned language models to provide contextual suggestions.",
+    problem: "Most writing tools focus on grammar, not clarity and structure.",
+    solution: "AI that understands context and suggests structural improvements, not just corrections.",
+    impact: "Used by 10k+ writers, 4.8★ average rating.",
+    tags: ["GPT-4", "Next.js", "Python", "NLP"],
+    link: null
+  },
+  {
+    title: "Open Source CLI Tools",
+    period: "2022 - Present",
+    role: "Maintainer",
+    description: "A collection of command-line tools for developers, focusing on productivity and automation. Includes git utilities, file management, and workflow automation.",
+    problem: "Common developer tasks require too many steps and context switching.",
+    solution: "Fast, composable CLI tools that integrate with existing workflows.",
+    impact: "5k+ GitHub stars, used in CI/CD pipelines worldwide.",
+    tags: ["Rust", "Go", "Shell", "CLI"],
+    link: "https://github.com/yourusername"
+  },
+  {
+    title: "E-commerce Platform Rebuild",
+    period: "2021 - 2022",
+    role: "Senior Engineer",
+    description: "Complete technical rebuild of a legacy e-commerce platform, modernizing the stack while maintaining business continuity. Zero-downtime migration.",
+    problem: "Legacy monolith couldn't scale for Black Friday traffic spikes.",
+    solution: "Microservices architecture with auto-scaling and edge caching.",
+    impact: "10x improvement in page load times, 99.99% uptime during peak.",
+    tags: ["Node.js", "Kubernetes", "Redis", "AWS"],
+    link: null
+  }
+];
+---
+
+<BaseLayout title="Work" description="Selected projects and professional work.">
+  <section class="container-narrow py-20 md:py-32">
+    <!-- Header -->
+    <header class="mb-16">
+      <h1 class="text-4xl md:text-5xl font-extrabold mb-4">Work</h1>
+      <p class="text-xl text-os-muted">
+        Selected projects I've built or led. Each one taught me something new.
+      </p>
+    </header>
+
+    <!-- Projects -->
+    <div class="space-y-16">
+      {projects.map((project, index) => (
+        <article class="group">
+          <!-- Project Header -->
+          <div class="flex flex-wrap items-baseline justify-between gap-2 mb-4">
+            <h2 class="text-2xl md:text-3xl font-bold">
+              {project.link ? (
+                <a 
+                  href={project.link} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  class="hover:text-os-accent-hover transition-colors"
+                >
+                  {project.title} ↗
+                </a>
+              ) : (
+                project.title
+              )}
+            </h2>
+            <span class="text-sm text-os-muted">{project.period}</span>
+          </div>
+          
+          <p class="text-sm text-os-muted mb-4">Role: {project.role}</p>
+
+          <!-- Description -->
+          <p class="text-lg text-os-dark mb-6 leading-relaxed">
+            {project.description}
+          </p>
+
+          <!-- Problem → Solution → Impact -->
+          <div class="grid md:grid-cols-3 gap-4 mb-6">
+            <div class="p-4 bg-os-light/50 rounded-lg">
+              <p class="text-xs font-semibold text-os-muted uppercase tracking-wider mb-2">Problem</p>
+              <p class="text-sm text-os-dark">{project.problem}</p>
+            </div>
+            <div class="p-4 bg-os-light/50 rounded-lg">
+              <p class="text-xs font-semibold text-os-muted uppercase tracking-wider mb-2">Solution</p>
+              <p class="text-sm text-os-dark">{project.solution}</p>
+            </div>
+            <div class="p-4 bg-os-accent/10 rounded-lg border-l-2 border-os-accent">
+              <p class="text-xs font-semibold text-os-muted uppercase tracking-wider mb-2">Impact</p>
+              <p class="text-sm text-os-dark font-medium">{project.impact}</p>
+            </div>
+          </div>
+
+          <!-- Tags -->
+          <div class="flex flex-wrap gap-2">
+            {project.tags.map((tag) => (
+              <span class="px-2 py-1 text-xs font-medium text-os-muted bg-os-light rounded">
+                {tag}
+              </span>
+            ))}
+          </div>
+
+          {index < projects.length - 1 && (
+            <hr class="mt-16 border-os-light" />
+          )}
+        </article>
+      ))}
+    </div>
+
+    <!-- CTA -->
+    <div class="mt-20 pt-8 border-t border-os-light">
+      <p class="text-os-muted mb-4">
+        Interested in working together?
+      </p>
+      <a href="/contact" class="btn-primary">
+        Get in touch
+      </a>
+    </div>
+  </section>
+</BaseLayout>
